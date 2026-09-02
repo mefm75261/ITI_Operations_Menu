@@ -452,11 +452,29 @@ body{font-family:Arial,sans-serif;color:#fff;overflow:hidden}
   <div class="deco-grid deco-grid-red"></div>
   <div style="position:absolute;top:-60px;right:-60px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(192,57,43,0.09) 0%,transparent 70%);pointer-events:none;z-index:0"></div>
   <div class="hdr hdr-fill"><div class="hdr-brand"><button class="back-btn back-red" onclick="goPg('pg-hub')">◄ MENU</button><div class="hdr-pipe hdr-pipe-red"></div><div><div class="hdr-ttl">Yard Operations</div></div></div><img class="hdr-logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'"></div>
-  <div class="view-panel view-panel-fill">
+    <div class="view-panel view-panel-fill">
     <div class="view-tab view-tab-red active" onclick="setFrame(this,'yard','https://app.powerbi.com/view?r=eyJrIjoiOWY4ZjAxYzItZDc2ZC00YWExLTg0MzctOTEyOWU3YmEzMmY1IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9')" data-full="https://app.powerbi.com/view?r=eyJrIjoiOWY4ZjAxYzItZDc2ZC00YWExLTg0MzctOTEyOWU3YmEzMmY1IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"><i class="ti ti-chart-bar"></i>Yard Information</div>
-    <div class="view-tab view-tab-red" onclick="setFrame(this,'yard','https://strenaterminals-my.sharepoint.com/personal/btapia_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B811E1B41-09A1-49DE-948E-7FBE4EAE31D2%7D&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True')" data-full="https://strenaterminals-my.sharepoint.com/:x:/r/personal/btapia_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B811E1B41-09A1-49DE-948E-7FBE4EAE31D2%7D&file=PROGRAMACI%C3%93N%20STACKING.xlsx&action=default&mobileredirect=true&DefaultItemOpen=1&web=1"><i class="ti ti-table"></i>Planification</div>
+    <div class="view-tab view-tab-red" onclick="setFrame(this,'yard','https://strenaterminals-my.sharepoint.com/personal/btapia_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B811E1B41-09A1-49DE-948E-7FBE4EAE31D2%7D&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True')" data-full="https://strenaterminals-my.sharepoint.com/:x:/r/personal/btapia_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B811E1B41-09A1-49DE-948E-7FBE4EAE31D2%7D&file=PROGRAMACI%C3%93N%20STACKING.xlsx&action=default&mobileredirect=true&DefaultItemOpen=1&web=1"><i class="ti ti-table"></i>Stacking Plan</div>
+    <div class="view-tab view-tab-red" id="yard-dispatch-tab" onclick="setFrame(this,'yard','https://strenaterminals-my.sharepoint.com/personal/mfloresm_iti_cl/_layouts/15/Doc.aspx?sourcedoc={61062705-013f-42e2-b988-0166b8d0df08}&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True&waccluster=AE3&edaebp=&edaebf=res50')" data-full="https://strenaterminals-my.sharepoint.com/personal/mfloresm_iti_cl/_layouts/15/Doc.aspx?sourcedoc={61062705-013f-42e2-b988-0166b8d0df08}&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True&waccluster=AE3&edaebp=&edaebf=res50">
+      <i class="ti ti-table"></i>Dispatch Plan
+      <span onclick="buscarClickYardDispatch(event)" style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);margin-left:6px">
+        <i class="ti ti-search" style="font-size:12px"></i>
+      </span>
+    </div>
     <a class="view-open-link view-open-link-red" id="yard-open" href="https://app.powerbi.com/view?r=eyJrIjoiOWY4ZjAxYzItZDc2ZC00YWExLTg0MzctOTEyOWU3YmEzMmY1IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" target="_blank">Open <i class="ti ti-external-link"></i></a>
   </div>
+
+  <div id="yard-buscador-panel" class="hidden" style="position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:0 clamp(16px,4vw,52px);margin-bottom:clamp(8px,1.4vh,16px)">
+    <label style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--red-5)">Categoría:</label>
+    <select id="yard-categoria-picker" onchange="listarMesesPatioWeb()" style="padding:8px 12px;border-radius:9px;border:1px solid rgba(192,57,43,0.30);background:rgba(28,10,10,0.9);color:#fff;font-size:12px;font-weight:700">
+      <option value="0">Indirectos 1er Turno</option>
+      <option value="1">Despachos 2do Turno</option>
+      <option value="2">Desp. Bolivia 3er Turno</option>
+      <option value="3">Secuencia Directos</option>
+    </select>
+    <div id="yard-mes-lista" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+  </div>
+
   <div class="embed-wrap embed-wrap-fill"><iframe class="embed-frame embed-frame-fill" id="yard-frame" src="https://app.powerbi.com/view?r=eyJrIjoiOWY4ZjAxYzItZDc2ZC00YWExLTg0MzctOTEyOWU3YmEzMmY1IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" allowfullscreen></iframe></div>
 </div>
 <div id="pg-cfs" class="pg pg-cfs-bg pg-fill hidden">
@@ -527,6 +545,64 @@ function goPg(id) {
     requestAnimationFrame(() => { frame.src = currentSrc; });
   }
 }
+
+const CATEGORIAS_PATIO = [
+  {label: "Indirectos 1er Turno", folder: "1.-INDIRECTOS 1\u00b0TURNO"},
+  {label: "Despachos 2do Turno", folder: "2.- DESPACHOS 2\u00b0TURNO"},
+  {label: "Desp. Bolivia 3er Turno", folder: "3.- DESP. BOLIVIA 3\u00b0TURNO"},
+  {label: "Secuencia Directos", folder: "6.- SECUENCIA DIRECTOS"}
+];
+
+function buscarClickYardDispatch(event) {
+  event.stopPropagation();
+  const tab = document.getElementById('yard-dispatch-tab');
+  if (!tab.classList.contains('active')) {
+    tab.click();
+  }
+  document.getElementById('yard-buscador-panel').classList.toggle('hidden');
+  listarMesesPatioWeb();
+}
+
+function listarMesesPatioWeb() {
+  const catIndex = parseInt(document.getElementById('yard-categoria-picker').value, 10);
+  const categoria = CATEGORIAS_PATIO[catIndex];
+  const USUARIO_ONEDRIVE = 'mfloresm_iti_cl';
+  const contenedor = document.getElementById('yard-mes-lista');
+  contenedor.innerHTML = '';
+
+  const hoy = new Date();
+  const anioActual = hoy.getFullYear();
+  const mesActual = hoy.getMonth() + 1;
+  let anioAnterior, mesAnterior;
+  if (mesActual === 1) {
+    anioAnterior = anioActual - 1;
+    mesAnterior = 12;
+  } else {
+    anioAnterior = anioActual;
+    mesAnterior = mesActual - 1;
+  }
+
+  const disponibles = [
+    {anio: anioAnterior, mes: mesAnterior},
+    {anio: anioActual, mes: mesActual}
+  ];
+
+  disponibles.forEach(item => {
+    const nombreMesCarpeta = MESES_CARPETA_CFS[item.mes - 1];
+    const carpetaMes = item.mes + '.- ' + nombreMesCarpeta;
+    const rutaCarpeta = 'Documents/Secuencias operaciones terrestres/' + categoria.folder + '/' + item.anio + '/' + carpetaMes;
+    const idParam = encodeURIComponent('/personal/' + USUARIO_ONEDRIVE + '/' + rutaCarpeta);
+    const urlCarpeta = 'https://strenaterminals-my.sharepoint.com/my?id=' + idParam;
+
+    const link = document.createElement('a');
+    link.href = urlCarpeta;
+    link.target = '_blank';
+    link.textContent = MESES_DISPLAY_CFS[item.mes - 1] + ' ' + item.anio;
+    link.style.cssText = 'padding:8px 16px;border-radius:9px;border:1px solid rgba(192,57,43,0.30);background:rgba(192,57,43,0.10);color:var(--red-5);font-size:11px;font-weight:700;letter-spacing:1px;text-decoration:none;text-transform:uppercase';
+    contenedor.appendChild(link);
+  });
+}
+
 document.querySelectorAll('.view-panel').forEach(panel => {
   panel.querySelectorAll('.view-tab').forEach((tab, i) => {
     tab.style.setProperty('--shimmer-delay', (i * 0.3) + 's');
@@ -541,6 +617,9 @@ function setFrame(btn, area, url) {
   if (area === 'cfs') {
     document.getElementById('cfs-buscador-panel').classList.add('hidden');
     document.getElementById('cfs-buscador-program-panel').classList.add('hidden');
+  }
+  if (area === 'yard') {
+    document.getElementById('yard-buscador-panel').classList.add('hidden');
   }
 }
 
