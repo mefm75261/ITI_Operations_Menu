@@ -282,7 +282,6 @@ body{font-family:Arial,sans-serif;color:#fff;overflow:hidden}
 .pg-general-bg::before{content:'';position:absolute;inset:0;
   background:radial-gradient(circle at 20% 30%, rgba(13,122,107,0.09) 0%, transparent 50%);
   pointer-events:none;z-index:0}
-
 .view-open-link{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px;text-decoration:none;padding:8px 16px;border-radius:9px;border:1px solid;transition:all .2s;white-space:nowrap}
 .view-open-link:hover{transform:translateY(-2px)}
 .view-open-link-blue{color:var(--blue-5);background:rgba(32,144,224,0.20);border-color:var(--blue-4);box-shadow:0 0 0 1px rgba(32,144,224,0.25)}
@@ -293,7 +292,6 @@ body{font-family:Arial,sans-serif;color:#fff;overflow:hidden}
 .view-open-link-mustard:hover{background:rgba(201,162,39,0.34)}
 .view-open-link-teal{color:var(--teal-5);background:rgba(13,122,107,0.22);border-color:var(--teal-4);box-shadow:0 0 0 1px rgba(13,122,107,0.25)}
 .view-open-link-teal:hover{background:rgba(13,122,107,0.34)}
-
 .embed-wrap{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;padding:0 52px}
 .embed-wrap-fill{padding:0 clamp(12px,2.6vw,32px);min-height:0}
 .embed-frame{width:100%;flex:1;border:none;border-radius:12px;min-height:70vh;background:rgba(255,255,255,0.02)}
@@ -319,6 +317,70 @@ body{font-family:Arial,sans-serif;color:#fff;overflow:hidden}
   .div-banner{margin:0 16px 16px}
   .view-open-link{margin-left:0;width:100%;justify-content:flex-start}
 }
+
+/* ===== Weekly Schedule (Vessel Operations) ===== */
+.sched-wrap{display:flex;flex-direction:column;gap:12px;height:100%;min-height:0;overflow:hidden}
+.sched-wrap .sched-card:first-child{flex:0 0 auto}
+.sched-card{position:relative;background:linear-gradient(160deg,rgba(8,24,48,0.75),rgba(6,16,32,0.65));border:1px solid rgba(32,144,224,0.22);border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+.sched-card-hdr{display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(32,144,224,0.18);flex:0 0 auto}
+.sched-card-hdr .dot{width:8px;height:8px;border-radius:50%;background:var(--blue-4);box-shadow:0 0 8px var(--blue-4)}
+.sched-card-hdr h3{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue-5);margin:0}
+.sched-card-hdr .sched-sub{margin-left:auto;font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase}
+.sched-table-scroll{overflow-x:auto}
+table.sched-table{border-collapse:collapse;width:100%;min-width:1180px;font-size:11px}
+table.sched-table th,table.sched-table td{padding:5px 8px;border-right:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);white-space:nowrap}
+table.sched-table thead tr.grp th{background:rgba(32,144,224,0.16);color:var(--blue-5);font-size:10px;text-align:center;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+table.sched-table thead tr.sub th{background:rgba(32,144,224,0.08);color:rgba(112,200,255,.55);text-align:center;font-size:9px;font-weight:600;padding:4px}
+table.sched-table tbody tr:nth-child(even){background:rgba(255,255,255,0.015)}
+table.sched-table tbody tr:hover{background:rgba(32,144,224,0.06)}
+td.sv-name{font-weight:800;color:var(--blue-5)}
+.sv-tag{display:inline-block;font-size:8.5px;font-weight:700;padding:1px 6px;border-radius:8px;margin-left:5px;letter-spacing:.5px}
+.sv-tag.main{background:rgba(20,232,200,0.14);color:var(--teal-5)}
+.sv-tag.feed{background:rgba(255,255,255,0.08);color:rgba(255,255,255,.5)}
+td.sv-rot{font-family:'Consolas',monospace;font-size:9.6px;color:rgba(255,255,255,.55);white-space:normal;line-height:1.6}
+td.sv-rot .hub{color:var(--blue-5);font-weight:800}
+td.sv-rot .sep{color:rgba(255,255,255,.2)}
+td.sv-moves{text-align:right;font-weight:700;color:var(--blue-5)}
+td.sv-etx b{color:#fff}
+td.sv-grid{padding:3px 1px;text-align:center}
+.sv-bar{height:15px;min-width:12px;border-radius:3px;margin:0 1px}
+table.sched-table td.sv-grid{min-width:20px}
+.sv-bar.solid{background:linear-gradient(180deg,var(--blue-5),var(--blue-3))}
+.sv-bar.hatch{background-image:repeating-linear-gradient(45deg,var(--blue-1),var(--blue-1) 2.5px,var(--mustard-4) 2.5px,var(--mustard-4) 5px)}
+.sv-pier{display:inline-block;padding:2px 8px;border-radius:7px;font-size:9.5px;font-weight:700;background:rgba(32,144,224,0.14);color:var(--blue-5)}
+.sv-freq{display:inline-block;padding:2px 8px;border-radius:7px;font-size:9.5px;font-weight:700}
+.sv-freq.wk{background:rgba(20,232,200,0.14);color:var(--teal-5)}
+.sv-freq.bw{background:rgba(230,195,77,0.16);color:var(--mustard-5)}
+.sv-lines{font-size:9.6px;color:rgba(255,255,255,.5)}
+.sv-lines b{color:#fff}
+.sched-legend{display:flex;align-items:center;gap:8px;padding:7px 16px;font-size:10px;color:rgba(255,255,255,.4)}
+.sched-legend .sw{width:14px;height:14px;border-radius:3px;background-image:repeating-linear-gradient(45deg,var(--blue-1),var(--blue-1) 2.5px,var(--mustard-4) 2.5px,var(--mustard-4) 5px)}
+.sched-maps{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;flex:1;min-height:0}
+@media(max-width:1100px){.sched-maps{grid-template-columns:1fr}}
+.sched-maps>.sched-card{display:flex;flex-direction:column;min-height:0}
+.map-canvas{position:relative;width:100%;flex:1;min-height:0;background:#050e1c;border-radius:0 0 12px 12px;overflow:hidden}
+.map-land{position:absolute;inset:0}
+.map-land svg{width:100%;height:100%;display:block}
+.map-land svg path{fill:rgba(120,170,220,0.16);stroke:rgba(120,170,220,0.22);stroke-width:.6}
+.map-overlay{position:absolute;inset:0;width:100%;height:100%}
+.map-port-label{font-size:9.5px;font-weight:700;fill:#e8f4ff;font-family:Arial,sans-serif}
+.map-port-dot{fill:#050e1c;stroke-width:2.2}
+.map-legend{display:flex;gap:14px;padding:6px 16px;font-size:10px;color:rgba(255,255,255,.4);flex-wrap:wrap;flex:0 0 auto}
+.map-legend .ln{width:18px;height:3px;border-radius:2px;display:inline-block;margin-right:5px;vertical-align:middle}
+
+
+.sched-maps-col{display:flex;flex-direction:column;gap:16px;min-height:0}
+.sched-maps-col>.sched-card{display:flex;flex-direction:column;min-height:0}
+.sched-maps-col>.sched-card:first-child{flex:1.3}
+.sched-maps-col>.sched-card:last-child{flex:1}
+.ws4-tags{display:flex;gap:6px;padding:8px 16px 0;flex-wrap:wrap;flex:0 0 auto}
+.ws4-tags span{font-size:9px;font-weight:700;padding:3px 9px;border-radius:6px;background:rgba(255,255,255,0.05);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,0.08);letter-spacing:.5px;text-transform:uppercase}
+.ws4-tags span.active{background:rgba(32,144,224,0.22);color:var(--blue-5);border-color:rgba(32,144,224,0.4)}
+.ws4-tags span.north{background:rgba(255,255,255,0.08);color:#fff}
+.ws4-tags span.south{background:rgba(230,195,77,0.16);color:var(--mustard-5)}
+.ws4-diagram{padding:6px 18px 16px;flex:1;min-height:0;display:flex}
+.ws4-diagram svg{width:100%;height:100%;display:block}
+
 </style>
 </head>
 <body>
@@ -437,6 +499,7 @@ body{font-family:Arial,sans-serif;color:#fff;overflow:hidden}
   <div style="position:absolute;top:-60px;right:-60px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(32,144,224,0.08) 0%,transparent 70%);pointer-events:none;z-index:0"></div>
   <div class="hdr hdr-fill"><div class="hdr-brand"><button class="back-btn back-blue" onclick="goPg('pg-hub')">◄ MENU</button><div class="hdr-pipe hdr-pipe-blue"></div><div><div class="hdr-ttl">Vessel Operations</div></div></div><img class="hdr-logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'"></div>
   <div class="view-panel view-panel-fill">
+    <div class="view-tab view-tab-blue" id="vessels-schedule-tab" onclick="showSchedule(this)"><i class="ti ti-calendar-stats"></i>Weekly Schedule</div>
     <div class="view-tab view-tab-blue active" onclick="setFrame(this,'vessels','https://app.powerbi.com/view?r=eyJrIjoiNTdkNmU3NjItZjI5Mi00MTg1LWE0OTEtNmNmOGU1NThiZjUxIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9')" data-full="https://app.powerbi.com/view?r=eyJrIjoiNTdkNmU3NjItZjI5Mi00MTg1LWE0OTEtNmNmOGU1NThiZjUxIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"><i class="ti ti-chart-bar"></i>General Performance</div>
     <div class="view-tab view-tab-blue" onclick="setFrame(this,'vessels','https://app.powerbi.com/view?r=eyJrIjoiMjczMGFlOGEtYTBjYi00ZGRmLWI0NGYtNTgxNTg5Y2JiOTI2IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9')" data-full="https://app.powerbi.com/view?r=eyJrIjoiMjczMGFlOGEtYTBjYi00ZGRmLWI0NGYtNTgxNTg5Y2JiOTI2IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"><i class="ti ti-chart-bar"></i>Operator Performance</div>
     <div class="view-tab view-tab-blue" onclick="setFrame(this,'vessels','https://app.powerbi.com/view?r=eyJrIjoiM2NiNTRiNTctMTcwNC00MDFkLWExY2YtOTg1OGMxOTc4MzZhIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9')" data-full="https://app.powerbi.com/view?r=eyJrIjoiM2NiNTRiNTctMTcwNC00MDFkLWExY2YtOTg1OGMxOTc4MzZhIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"><i class="ti ti-chart-bar"></i>Detentions</div>
@@ -447,6 +510,134 @@ body{font-family:Arial,sans-serif;color:#fff;overflow:hidden}
     <a class="view-open-link view-open-link-blue" id="vessels-open" href="https://app.powerbi.com/view?r=eyJrIjoiNTdkNmU3NjItZjI5Mi00MTg1LWE0OTEtNmNmOGU1NThiZjUxIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" target="_blank">Open <i class="ti ti-external-link"></i></a>
   </div>
   <div class="embed-wrap embed-wrap-fill"><iframe class="embed-frame embed-frame-fill" id="vessels-frame" src="https://app.powerbi.com/view?r=eyJrIjoiNTdkNmU3NjItZjI5Mi00MTg1LWE0OTEtNmNmOGU1NThiZjUxIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" allowfullscreen></iframe></div>
+  <div class="embed-wrap embed-wrap-fill hidden" id="vessels-schedule-wrap">
+    <div class="sched-wrap">
+
+      <div class="sched-card">
+        <div class="sched-card-hdr"><span class="dot"></span><h3>Service Schedule</h3><span class="sched-sub">5 active services</span></div>
+        <div class="sched-table-scroll">
+        <table class="sched-table">
+          <thead>
+            <tr class="grp">
+              <th style="text-align:left">SERVICE</th>
+              <th style="text-align:left">PORT ROTATION</th>
+              <th>MOVES</th><th>ETB</th><th>ETD</th>
+              <th colspan="3">MON</th><th colspan="3">TUE</th><th colspan="3">WED</th>
+              <th colspan="3">THU</th><th colspan="3">FRI</th><th colspan="3">SAT</th><th colspan="3">SUN</th>
+              <th>PIER</th><th>FREQ.</th><th>LINES</th>
+            </tr>
+            <tr class="sub">
+              <th></th><th></th><th></th><th></th><th></th>
+              <th>1&deg;</th><th>2&deg;</th><th>3&deg;</th><th>1&deg;</th><th>2&deg;</th><th>3&deg;</th><th>1&deg;</th><th>2&deg;</th><th>3&deg;</th><th>1&deg;</th><th>2&deg;</th><th>3&deg;</th><th>1&deg;</th><th>2&deg;</th><th>3&deg;</th><th>1&deg;</th><th>2&deg;</th><th>3&deg;</th><th>1&deg;</th><th>2&deg;</th><th>3&deg;</th>
+              <th></th><th></th><th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+        <td class="sv-name">AN1<span class="sv-tag main">MAINLINER</span></td>
+        <td class="sv-rot"><span>CNHKG</span><span class="sep">&rsaquo;</span><wbr><span>CNYTN</span><span class="sep">&rsaquo;</span><wbr><span>TWKEL</span><span class="sep">&rsaquo;</span><wbr><span>CNSHA</span><span class="sep">&rsaquo;</span><wbr><span>CNNBO</span><span class="sep">&rsaquo;</span><wbr><span>KRPUS</span><span class="sep">&rsaquo;</span><wbr><span>MXZLO</span><span class="sep">&rsaquo;</span><wbr><span>MXLZC</span><span class="sep">&rsaquo;</span><wbr><span>PECLL</span><span class="sep">&rsaquo;</span><wbr><span class="hub">CLIQQ</span><span class="sep">&rsaquo;</span><wbr><span>CLPAG</span><span class="sep">&rsaquo;</span><wbr><span>CLVAP</span><span class="sep">&rsaquo;</span><wbr><span>CLSVE</span></td>
+        <td class="sv-moves">2000</td>
+        <td class="sv-etx"><b>Sat 6:00</b></td>
+        <td class="sv-etx"><b>Mon 22:00</b></td>
+        <td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar solid"></div></td>
+        <td><span class="sv-pier">Pier 4</span></td>
+        <td><span class="sv-freq wk">Weekly</span></td>
+        <td class="sv-lines"><b>MSC</b> | <b>HLC</b> | <b>HMM</b> | <b>ONE</b></td>
+    </tr><tr>
+        <td class="sv-name">ATACAMA<span class="sv-tag feed">FEEDER</span></td>
+        <td class="sv-rot"><span>CLARI</span><span class="sep">&rsaquo;</span><wbr><span class="hub">CLIQQ</span><span class="sep">&rsaquo;</span><wbr><span>CLSAI</span><span class="sep">&rsaquo;</span><wbr><span>CLSVE</span><span class="sep">&rsaquo;</span><wbr><span>CLCQQ</span><span class="sep">&rsaquo;</span><wbr><span>PECLL</span><span class="sep">&rsaquo;</span><wbr><span>PABLB</span></td>
+        <td class="sv-moves">450</td>
+        <td class="sv-etx"><b>Fri 6:00</b></td>
+        <td class="sv-etx"><b>Sat 6:00</b></td>
+        <td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar hatch"></div></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td>
+        <td><span class="sv-pier">Pier 4</span></td>
+        <td><span class="sv-freq wk">Weekly</span></td>
+        <td class="sv-lines"><b>MSK</b></td>
+    </tr><tr>
+        <td class="sv-name">ALPACA<span class="sv-tag main">MAINLINER</span></td>
+        <td class="sv-rot"><span>CNNBO</span><span class="sep">&rsaquo;</span><wbr><span>KRPUS</span><span class="sep">&rsaquo;</span><wbr><span>PECLL</span><span class="sep">&rsaquo;</span><wbr><span>CLARI</span><span class="sep">&rsaquo;</span><wbr><span class="hub">CLIQQ</span><span class="sep">&rsaquo;</span><wbr><span>CLSAI</span><span class="sep">&rsaquo;</span><wbr><span>CNNSA</span><span class="sep">&rsaquo;</span><wbr><span>CNHKG</span></td>
+        <td class="sv-moves">2500</td>
+        <td class="sv-etx"><b>Mon 22:00</b></td>
+        <td class="sv-etx"><b>Fri 6:00</b></td>
+        <td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar hatch"></div></td><td class="sv-grid"><div class="sv-bar hatch"></div></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td>
+        <td><span class="sv-pier">Pier 4</span></td>
+        <td><span class="sv-freq wk">Weekly</span></td>
+        <td class="sv-lines"><b>MSC</b></td>
+    </tr><tr>
+        <td class="sv-name">CHX2<span class="sv-tag feed">FEEDER</span></td>
+        <td class="sv-rot"><span>PECLL</span><span class="sep">&rsaquo;</span><wbr><span class="hub">CLIQQ</span><span class="sep">&rsaquo;</span><wbr><span>CLARI</span><span class="sep">&rsaquo;</span><wbr><span>PEILQ</span><span class="sep">&rsaquo;</span><wbr><span>PECHY</span></td>
+        <td class="sv-moves">250</td>
+        <td class="sv-etx"><b>Mon 21:00</b></td>
+        <td class="sv-etx"><b>Tue 22:00</b></td>
+        <td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar hatch"></div></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td>
+        <td><span class="sv-pier">Pier 3</span></td>
+        <td><span class="sv-freq wk">Weekly</span></td>
+        <td class="sv-lines"><b>CMA</b> | <b>EVE</b> | <b>COS</b></td>
+    </tr><tr>
+        <td class="sv-name">WS4<span class="sv-tag feed">FEEDER</span></td>
+        <td class="sv-rot"><span>PECLL</span><span class="sep">&rsaquo;</span><wbr><span class="hub">CLIQQ</span><span class="sep">&rsaquo;</span><wbr><span>CLANF</span><span class="sep">&rsaquo;</span><wbr><span>CLPAG</span><span class="sep">&rsaquo;</span><wbr><span>CLARI</span><span class="sep">&rsaquo;</span><wbr><span>PEMRI</span></td>
+        <td class="sv-moves">400</td>
+        <td class="sv-etx"><b>Wed 6:00</b></td>
+        <td class="sv-etx"><b>Thu 6:00</b></td>
+        <td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar solid"></div></td><td class="sv-grid"><div class="sv-bar hatch"></div></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td><td class="sv-grid"></td>
+        <td><span class="sv-pier">Pier 3</span></td>
+        <td><span class="sv-freq bw">Biweekly</span></td>
+        <td class="sv-lines"><b>HLC</b></td>
+    </tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="sched-legend"><span class="sw"></span> Shifts depend on volume</div>
+      </div>
+
+      <div class="sched-maps">
+        <div class="sched-card">
+          <div class="sched-card-hdr"><span class="dot" style="background:#F07D28;box-shadow:0 0 8px #F07D28"></span><h3>AN1 &mdash; Mainliner Asia / N.America / S.America</h3></div>
+          <div class="map-canvas" id="an1-map">
+            <div class="map-land" data-vb="55 90 680 385"></div>
+            <svg class="map-overlay" viewBox="55 90 680 385" xmlns="http://www.w3.org/2000/svg">
+  <defs><marker id="am-F07D28" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#F07D28"/></marker><marker id="am-274a6e" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#274a6e"/></marker></defs>
+  <path d="M 640.7,221.1 Q 640.85,220.6 641.0,220.1 Q 650.1,215.95 659.2,211.8 Q 658.9000000000001,201.8 658.6,191.8 Q 658.75,194.05 658.9,196.3 Q 668.0,187.7 677.1,179.1 " fill="none" stroke="#F07D28" stroke-width="2.6" stroke-linecap="round"/><path d="M 677.1,179.1 Q 548.55,163.55 420,148 Q 335.0,168.0 250,188 Q 177.9,209.75 105.8,231.5 " fill="none" stroke="#F07D28" stroke-width="2.6" marker-end="url(#am-F07D28)" stroke-linecap="round"/><path d="M 111.0,235.3 Q 130.5,255.15 150,275 Q 161.15,304.25 172.3,333.5 Q 180.65,344.05 189.0,354.6 Q 189.25,357.45000000000005 189.5,360.3 Q 189.1,365.0 188.7,369.7 Q 187.3,386.0 185.9,402.3 Q 184.05,408.35 182.2,414.4 " fill="none" stroke="#274a6e" stroke-width="2.6" marker-end="url(#am-274a6e)" stroke-linecap="round"/><circle class="map-port-dot" cx="640.7" cy="221.1" r="3.6" stroke="#F07D28"/><circle class="map-port-dot" cx="641.0" cy="220.1" r="3.6" stroke="#F07D28"/><circle class="map-port-dot" cx="659.2" cy="211.8" r="3.6" stroke="#F07D28"/><circle class="map-port-dot" cx="658.6" cy="191.8" r="3.6" stroke="#F07D28"/><circle class="map-port-dot" cx="658.9" cy="196.3" r="3.6" stroke="#F07D28"/><circle class="map-port-dot" cx="677.1" cy="179.1" r="3.6" stroke="#F07D28"/><circle class="map-port-dot" cx="105.8" cy="231.5" r="3.6" stroke="#274a6e"/><circle class="map-port-dot" cx="111.0" cy="235.3" r="3.6" stroke="#274a6e"/><circle class="map-port-dot" cx="172.3" cy="333.5" r="3.6" stroke="#274a6e"/><circle class="map-port-dot" cx="189.0" cy="354.6" r="3.6" stroke="#274a6e"/><circle class="map-port-dot" cx="189.5" cy="360.3" r="3.6" stroke="#274a6e"/><circle class="map-port-dot" cx="188.7" cy="369.7" r="3.6" stroke="#274a6e"/><circle class="map-port-dot" cx="185.9" cy="402.3" r="3.6" stroke="#274a6e"/><circle class="map-port-dot" cx="182.2" cy="414.4" r="3.6" stroke="#274a6e"/><text class="map-port-label" x="632.7" y="234.1" text-anchor="end">Hong Kong</text><text class="map-port-label" x="633.0" y="212.1" text-anchor="end">Yantian</text><text class="map-port-label" x="668.2" y="219.8" text-anchor="start">Keelung</text><text class="map-port-label" x="667.6" y="186.8" text-anchor="start">Shanghai</text><text class="map-port-label" x="649.9" y="190.3" text-anchor="end">Ningbo</text><text class="map-port-label" x="686.1" y="174.1" text-anchor="start">Busan</text><text class="map-port-label" x="114.8" y="235.5" text-anchor="start">Manzanillo</text><text class="map-port-label" x="120.0" y="250.3" text-anchor="start">Lazaro Cardenas</text><text class="map-port-label" x="181.3" y="336.5" text-anchor="start">Callao</text><text class="map-port-label" x="200.0" y="348.6" text-anchor="start">Arica</text><text class="map-port-label" x="200.5" y="365.3" text-anchor="start">Iquique</text><text class="map-port-label" x="199.7" y="384.7" text-anchor="start">P. Angamos</text><text class="map-port-label" x="176.9" y="397.3" text-anchor="end">Valparaiso</text><text class="map-port-label" x="173.2" y="427.4" text-anchor="end">San Vicente</text>
+</svg>
+          </div>
+          <div class="map-legend">
+            <span><i class="ln" style="background:#F07D28"></i>Trans-Pacific (Asia &rarr; Mexico)</span>
+            <span><i class="ln" style="background:#274a6e"></i>Coastal (Mexico &rarr; Chile)</span>
+          </div>
+        </div>
+<div class="sched-maps-col">
+        <div class="sched-card">
+          <div class="sched-card-hdr"><span class="dot" style="background:#D94F70;box-shadow:0 0 8px #D94F70"></span><h3>LLAMA &mdash; Feeder Network</h3></div>
+          <div class="map-canvas" id="llama-map">
+            <div class="map-land" data-vb="110 90 630 345"></div>
+            <svg class="map-overlay" viewBox="110 90 630 345" xmlns="http://www.w3.org/2000/svg">
+  <defs><marker id="am-D94F70" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#D94F70"/></marker><marker id="am-3E7CB1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#3E7CB1"/></marker></defs>
+  <path d="M 677.1,179.1 Q 668.0,187.7 658.9,196.3 " fill="none" stroke="#D94F70" stroke-width="2.6" stroke-linecap="round"/><path d="M 658.9,196.3 Q 544.45,172.15 430,148 Q 301.15,240.75 172.3,333.5 " fill="none" stroke="#D94F70" stroke-width="2.6" marker-end="url(#am-D94F70)" stroke-linecap="round"/><path d="M 172.3,333.5 Q 180.65,344.05 189.0,354.6 Q 189.25,357.45000000000005 189.5,360.3 " fill="none" stroke="#D94F70" stroke-width="2.6" marker-end="url(#am-D94F70)" stroke-linecap="round"/><path d="M 640.7,221.1 Q 530.35,226.55 420,232 Q 304.75,296.15 189.5,360.3 " fill="none" stroke="#3E7CB1" stroke-width="2.6" marker-end="url(#am-3E7CB1)" stroke-linecap="round"/><path d="M 189.5,360.3 Q 187.7,382.20000000000005 185.9,404.1 " fill="none" stroke="#3E7CB1" stroke-width="2.6" marker-end="url(#am-3E7CB1)" stroke-linecap="round"/><circle class="map-port-dot" cx="677.1" cy="179.1" r="3.6" stroke="#D94F70"/><circle class="map-port-dot" cx="658.9" cy="196.3" r="3.6" stroke="#D94F70"/><circle class="map-port-dot" cx="639.1" cy="219.5" r="3.6" stroke="#3E7CB1"/><circle class="map-port-dot" cx="640.7" cy="221.1" r="3.6" stroke="#3E7CB1"/><circle class="map-port-dot" cx="172.3" cy="333.5" r="3.6" stroke="#3E7CB1"/><circle class="map-port-dot" cx="189.0" cy="354.6" r="3.6" stroke="#3E7CB1"/><circle class="map-port-dot" cx="189.5" cy="360.3" r="3.6" stroke="#3E7CB1"/><circle class="map-port-dot" cx="185.9" cy="404.1" r="3.6" stroke="#3E7CB1"/><text class="map-port-label" x="686.1" y="173.1" text-anchor="start">Busan</text><text class="map-port-label" x="649.9" y="190.3" text-anchor="end">Ningbo</text><text class="map-port-label" x="630.1" y="234.5" text-anchor="end">Nansha</text><text class="map-port-label" x="631.7" y="225.1" text-anchor="end">Hong Kong</text><text class="map-port-label" x="182.3" y="327.5" text-anchor="start">Callao</text><text class="map-port-label" x="199.0" y="358.6" text-anchor="start">Arica</text><text class="map-port-label" x="199.5" y="377.3" text-anchor="start">Iquique</text><text class="map-port-label" x="176.9" y="408.1" text-anchor="end">San Antonio</text>
+</svg>
+          </div>
+          <div class="map-legend">
+            <span><i class="ln" style="background:#D94F70"></i>Via Ningbo / Busan</span>
+            <span><i class="ln" style="background:#3E7CB1"></i>Via Hong Kong / Nansha</span>
+          </div>
+        </div>
+
+        <div class="sched-card">
+          <div class="sched-card-hdr"><span class="dot" style="background:var(--blue-4);box-shadow:0 0 8px var(--blue-4)"></span><h3>WS4 &mdash; Port Rotation</h3></div>
+          <div class="ws4-tags">
+            <span class="active">WS4</span>
+            <span><i class="ti ti-clock" style="font-size:10px"></i> 14 days</span>
+            <span><i class="ti ti-world" style="font-size:10px"></i> IRT Americas</span>
+            <span class="north">NORTH (outbound)</span>
+            <span class="south">SOUTH (return)</span>
+          </div>
+          <div class="ws4-diagram" id="ws4-diagram"></div>
+        </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
 </div>
 <div id="pg-yard" class="pg pg-yard-bg pg-fill hidden">
   <div class="deco-grid deco-grid-red"></div>
@@ -464,7 +655,6 @@ body{font-family:Arial,sans-serif;color:#fff;overflow:hidden}
     </div>
     <a class="view-open-link view-open-link-red" id="yard-open" href="https://app.powerbi.com/view?r=eyJrIjoiOWY4ZjAxYzItZDc2ZC00YWExLTg0MzctOTEyOWU3YmEzMmY1IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" target="_blank">Open <i class="ti ti-external-link"></i></a>
   </div>
-
   <div id="yard-buscador-panel" class="hidden" style="position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:0 clamp(16px,4vw,52px);margin-bottom:clamp(8px,1.4vh,16px)">
     <label style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--red-5)">Category:</label>
     <select id="yard-categoria-picker" onchange="listarMesesPatioWeb()" style="padding:8px 12px;border-radius:9px;border:1px solid rgba(192,57,43,0.30);background:rgba(28,10,10,0.9);color:#fff;font-size:12px;font-weight:700">
@@ -475,7 +665,6 @@ body{font-family:Arial,sans-serif;color:#fff;overflow:hidden}
     </select>
     <div id="yard-mes-lista" style="display:flex;flex-wrap:wrap;gap:8px"></div>
   </div>
-
   <div class="embed-wrap embed-wrap-fill"><iframe class="embed-frame embed-frame-fill" id="yard-frame" src="https://app.powerbi.com/view?r=eyJrIjoiOWY4ZjAxYzItZDc2ZC00YWExLTg0MzctOTEyOWU3YmEzMmY1IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" allowfullscreen></iframe></div>
 </div>
 <div id="pg-cfs" class="pg pg-cfs-bg pg-fill hidden">
@@ -493,14 +682,12 @@ body{font-family:Arial,sans-serif;color:#fff;overflow:hidden}
         <i class="ti ti-search" style="font-size:12px"></i>
       </span>
     </div>
-
     <div class="view-tab view-tab-mustard" id="cfs-program-tab" onclick="setFrame(this,'cfs','https://strenaterminals-my.sharepoint.com/personal/mfloresm_iti_cl/_layouts/15/Doc.aspx?sourcedoc={40f795b7-a241-4d21-a8f4-c3fb10df3bbe}&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True&waccluster=GCL1&edaebp=&edaebf=res50')" data-full="https://strenaterminals-my.sharepoint.com/:x:/r/personal/mfloresm_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B40F795B7-A241-4D21-A8F4-C3FB10DF3BBE%7D&file=PROGRAMACI%C3%93N%20GENERAL%20CFS.xlsx&action=default&mobileredirect=true">
       <i class="ti ti-table"></i>Program
       <span onclick="buscarClickProgram(event)" style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);margin-left:6px">
         <i class="ti ti-search" style="font-size:12px"></i>
       </span>
     </div>
-
     <a class="view-open-link view-open-link-mustard" id="cfs-open" href="https://app.powerbi.com/view?r=eyJrIjoiMmE5MDA3YzEtOWUxNS00YTE3LWJjZmUtYjQzYTAwZmEwMTQwIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" target="_blank">Open <i class="ti ti-external-link"></i></a>
   </div>
   <div id="cfs-buscador-panel" class="hidden" style="position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:0 clamp(16px,4vw,52px);margin-bottom:clamp(8px,1.4vh,16px)">
@@ -510,7 +697,6 @@ body{font-family:Arial,sans-serif;color:#fff;overflow:hidden}
     </select>
     <div id="cfs-mes-lista" style="display:flex;flex-wrap:wrap;gap:8px"></div>
   </div>
-
   <div id="cfs-buscador-program-panel" class="hidden" style="position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:0 clamp(16px,4vw,52px);margin-bottom:clamp(8px,1.4vh,16px)">
     <label style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--mustard-4)">Year:</label>
     <select id="program-anio-picker" onchange="listarAnioPrograma()" style="padding:8px 12px;border-radius:9px;border:1px solid rgba(201,162,39,0.30);background:rgba(28,21,0,0.9);color:#fff;font-size:12px;font-weight:700">
@@ -518,7 +704,6 @@ body{font-family:Arial,sans-serif;color:#fff;overflow:hidden}
     </select>
     <div id="program-anio-lista" style="display:flex;flex-wrap:wrap;gap:8px"></div>
   </div>
-
   <div class="embed-wrap embed-wrap-fill"><iframe class="embed-frame embed-frame-fill" id="cfs-frame" src="https://app.powerbi.com/view?r=eyJrIjoiMmE5MDA3YzEtOWUxNS00YTE3LWJjZmUtYjQzYTAwZmEwMTQwIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" allowfullscreen></iframe></div>
 </div>
 <div id="pg-general" class="pg pg-general-bg pg-fill hidden">
@@ -546,14 +731,12 @@ function goPg(id) {
     requestAnimationFrame(() => { frame.src = currentSrc; });
   }
 }
-
 const CATEGORIAS_PATIO = [
   {label: "Indirectos 1er Turno", folder: "1.-INDIRECTOS 1\u00b0TURNO"},
   {label: "Despachos 2do Turno", folder: "2.- DESPACHOS 2\u00b0TURNO"},
   {label: "Desp. Bolivia 3er Turno", folder: "3.- DESP. BOLIVIA 3\u00b0TURNO"},
   {label: "Secuencia Directos", folder: "6.- SECUENCIA DIRECTOS"}
 ];
-
 function buscarClickYardDispatch(event) {
   event.stopPropagation();
   const tab = document.getElementById('yard-dispatch-tab');
@@ -563,14 +746,12 @@ function buscarClickYardDispatch(event) {
   document.getElementById('yard-buscador-panel').classList.toggle('hidden');
   listarMesesPatioWeb();
 }
-
 function listarMesesPatioWeb() {
   const catIndex = parseInt(document.getElementById('yard-categoria-picker').value, 10);
   const categoria = CATEGORIAS_PATIO[catIndex];
   const USUARIO_ONEDRIVE = 'mfloresm_iti_cl';
   const contenedor = document.getElementById('yard-mes-lista');
   contenedor.innerHTML = '';
-
   const hoy = new Date();
   const anioActual = hoy.getFullYear();
   const mesActual = hoy.getMonth() + 1;
@@ -582,19 +763,16 @@ function listarMesesPatioWeb() {
     anioAnterior = anioActual;
     mesAnterior = mesActual - 1;
   }
-
   const disponibles = [
     {anio: anioAnterior, mes: mesAnterior},
     {anio: anioActual, mes: mesActual}
   ];
-
   disponibles.forEach(item => {
     const nombreMesCarpeta = MESES_CARPETA_CFS[item.mes - 1];
     const carpetaMes = item.mes + '.- ' + nombreMesCarpeta;
     const rutaCarpeta = 'Documents/Secuencias operaciones terrestres/' + categoria.folder + '/' + item.anio + '/' + carpetaMes;
     const idParam = encodeURIComponent('/personal/' + USUARIO_ONEDRIVE + '/' + rutaCarpeta);
     const urlCarpeta = 'https://strenaterminals-my.sharepoint.com/my?id=' + idParam;
-
     const link = document.createElement('a');
     link.href = urlCarpeta;
     link.target = '_blank';
@@ -603,13 +781,77 @@ function listarMesesPatioWeb() {
     contenedor.appendChild(link);
   });
 }
-
 document.querySelectorAll('.view-panel').forEach(panel => {
   panel.querySelectorAll('.view-tab').forEach((tab, i) => {
     tab.style.setProperty('--shimmer-delay', (i * 0.3) + 's');
   });
 });
+let _worldMapSVGText = null;
+async function getWorldMapSVG() {
+  if (_worldMapSVGText) return _worldMapSVGText;
+  const res = await fetch('img/world-map.svg');
+  _worldMapSVGText = await res.text();
+  return _worldMapSVGText;
+}
+async function mountWorldMap(container) {
+  if (container.dataset.mounted) return;
+  const svgText = await getWorldMapSVG();
+  const vb = container.dataset.vb;
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(svgText, 'image/svg+xml');
+  const srcSvg = doc.querySelector('svg');
+  srcSvg.setAttribute('viewBox', vb);
+  srcSvg.removeAttribute('width');
+  srcSvg.removeAttribute('height');
+  container.appendChild(srcSvg);
+  container.dataset.mounted = '1';
+}
+function mountAllMaps() {
+  document.querySelectorAll('.map-land').forEach(mountWorldMap);
+  buildWS4Diagram();
+}
+function buildWS4Diagram() {
+  const el = document.getElementById('ws4-diagram');
+  if (!el || el.dataset.built) return;
+  el.dataset.built = '1';
+  const north = ["ANTOFAGASTA","P. ANGAMOS","ARICA","MATARANI","CALLAO","IQUIQUE"];
+  const south = ["CALLAO","IQUIQUE","ANTOFAGASTA","P. ANGAMOS","ARICA","MATARANI"];
+  function lineSvg(y, ports, color, side) {
+    const x0 = 90, x1 = 870, n = ports.length;
+    let s = `<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="${color}" stroke-width="5" stroke-linecap="round"/>`;
+    ports.forEach((name, i) => {
+      const x = x0 + i * (x1 - x0) / (n - 1);
+      s += `<circle cx="${x}" cy="${y}" r="6" fill="#0a1830" stroke="${color}" stroke-width="2.5"/>`;
+      const ly = side === 'top' ? y - 13 : y + 15;
+      const rot = side === 'top' ? -30 : 30;
+      s += `<text x="${x+4}" y="${ly}" font-size="10.5" font-weight="700" fill="#dfeeff" text-anchor="start" transform="rotate(${rot} ${x+4} ${ly})">${name}</text>`;
+    });
+    return s;
+  }
+  el.innerHTML = `<svg viewBox="0 0 960 190">
+    ${lineSvg(65, north, "var(--blue-4)", "top")}
+    ${lineSvg(125, south, "var(--mustard-4)", "bottom")}
+  </svg>`;
+}
+function showSchedule(btn) {
+  document.getElementById('vessels-frame').src = 'about:blank';
+  document.getElementById('vessels-schedule-wrap').classList.remove('hidden');
+  document.querySelectorAll('#pg-vessels .embed-wrap-fill').forEach(w => {
+    if (w.id !== 'vessels-schedule-wrap') w.classList.add('hidden');
+  });
+  btn.parentElement.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('vessels-open').style.visibility = 'hidden';
+  mountAllMaps();
+}
 function setFrame(btn, area, url) {
+  if (area === 'vessels') {
+    document.getElementById('vessels-schedule-wrap').classList.add('hidden');
+    document.querySelectorAll('#pg-vessels .embed-wrap-fill').forEach(w => {
+      if (w.id !== 'vessels-schedule-wrap') w.classList.remove('hidden');
+    });
+    document.getElementById('vessels-open').style.visibility = 'visible';
+  }
   const full = btn.dataset.full || url;
   document.getElementById(area + '-frame').src = url;
   document.getElementById(area + '-open').href = full;
@@ -623,10 +865,8 @@ function setFrame(btn, area, url) {
     document.getElementById('yard-buscador-panel').classList.add('hidden');
   }
 }
-
 const MESES_CARPETA_CFS = ["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"];
 const MESES_DISPLAY_CFS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-
 function buscarClickCFS(event) {
   event.stopPropagation();
   const tab = document.getElementById('cfs-planif-tab');
@@ -637,7 +877,6 @@ function buscarClickCFS(event) {
   document.getElementById('cfs-buscador-panel').classList.toggle('hidden');
   listarMesesCFS();
 }
-
 function buscarClickProgram(event) {
   event.stopPropagation();
   const tab = document.getElementById('cfs-program-tab');
@@ -648,14 +887,12 @@ function buscarClickProgram(event) {
   document.getElementById('cfs-buscador-program-panel').classList.toggle('hidden');
   listarAnioPrograma();
 }
-
 function listarAnioPrograma() {
   const anio = document.getElementById('program-anio-picker').value;
   const USUARIO_ONEDRIVE = 'mfloresm_iti_cl';
   const rutaCarpeta = 'Documents/Operaciones Log\u00edsticas - CFS/' + anio + '/2.- CFS DIARIA/RESPALDO';
   const idParam = encodeURIComponent('/personal/' + USUARIO_ONEDRIVE + '/' + rutaCarpeta);
   const urlCarpeta = 'https://strenaterminals-my.sharepoint.com/my?id=' + idParam;
-
   const contenedor = document.getElementById('program-anio-lista');
   contenedor.innerHTML = '';
   const link = document.createElement('a');
@@ -665,24 +902,20 @@ function listarAnioPrograma() {
   link.style.cssText = 'padding:8px 16px;border-radius:9px;border:1px solid rgba(201,162,39,0.30);background:rgba(201,162,39,0.10);color:var(--mustard-4);font-size:11px;font-weight:700;letter-spacing:1px;text-decoration:none;text-transform:uppercase';
   contenedor.appendChild(link);
 }
-
 function listarMesesCFS() {
   const anio = document.getElementById('cfs-anio-picker').value;
   const hoy = new Date();
   const esAnioActual = parseInt(anio, 10) === hoy.getFullYear();
   const ultimoMes = esAnioActual ? (hoy.getMonth() + 1) : 12;
-
   const USUARIO_ONEDRIVE = 'mfloresm_iti_cl';
   const contenedor = document.getElementById('cfs-mes-lista');
   contenedor.innerHTML = '';
-
   for (let m = 1; m <= ultimoMes; m++) {
     const nombreMesCarpeta = MESES_CARPETA_CFS[m - 1];
     const carpetaMes = m + '.- ' + nombreMesCarpeta;
     const rutaCarpeta = 'Documents/Operaciones Log\u00edsticas - CFS/' + anio + '/3.- PLANIFICACION DIARIA/' + carpetaMes;
     const idParam = encodeURIComponent('/personal/' + USUARIO_ONEDRIVE + '/' + rutaCarpeta);
     const urlCarpeta = 'https://strenaterminals-my.sharepoint.com/my?id=' + idParam;
-
     const link = document.createElement('a');
     link.href = urlCarpeta;
     link.target = '_blank';
