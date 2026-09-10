@@ -352,6 +352,21 @@ body{font-family:Arial,sans-serif;color:#fff;overflow:hidden}
 }
 .sched-scroll{overflow-y:auto;overflow-x:hidden;scrollbar-width:none;-ms-overflow-style:none}
 .sched-scroll::-webkit-scrollbar{width:0px;background:transparent}
+.sched-focus-btn{margin-left:auto;flex-shrink:0;width:24px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:5px;background:rgba(32,144,224,0.14);border:1px solid rgba(32,144,224,0.30);color:var(--blue-5);cursor:pointer;transition:.15s all}
+.sched-focus-btn:hover{background:rgba(32,144,224,0.28)}
+.sched-focus-btn i{font-size:12px}
+.sched-card-hdr .sched-sub+.sched-focus-btn{margin-left:10px}
+.sched-card.is-focused{
+  position:fixed;inset:16px;z-index:9998;
+  display:flex;flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,.7);
+  background:#06101f!important;
+}
+.sched-card.is-focused .sched-table-scroll{flex:1;min-height:0;overflow:auto}
+.sched-card.is-focused table.sched-table{min-width:0!important;width:max-content}
+.sched-card.is-focused .map-canvas{flex:1;min-height:0}
+.sched-focus-backdrop{position:fixed;inset:0;z-index:9997;background:rgba(2,6,12,0.94)}
+.sched-card-hdr{position:relative}
 .sched-wrap{display:flex;flex-direction:column;gap:clamp(8px,1.4vh,12px);width:100%;flex:1;min-height:0}
 .sched-card{position:relative;background:linear-gradient(160deg,rgba(8,24,48,0.75),rgba(6,16,32,0.65));border:1px solid rgba(32,144,224,0.22);border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.5)}
 .sched-card-hdr{display:flex;align-items:center;gap:10px;padding:clamp(5px,1vh,9px) 16px;border-bottom:1px solid rgba(32,144,224,0.18);flex-wrap:wrap;row-gap:4px}
@@ -360,6 +375,15 @@ body{font-family:Arial,sans-serif;color:#fff;overflow:hidden}
 .sched-card-hdr .sched-sub{margin-left:auto;font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase}
 .sched-table-scroll{overflow-x:auto}
 table.sched-table{border-collapse:collapse;width:100%;min-width:1180px;font-size:clamp(9px,1.3vh,11px)}
+/* La grilla de días (MON-SUN) es más importante que el texto de rotación de
+   puertos. En vez de dejar que ese texto haga crecer el alto de la tabla,
+   directamente se oculta esa columna cuando no hay ancho cómodo, así el
+   scroll horizontal restante prioriza llegar antes a los días. */
+@media(max-width:1050px){
+  table.sched-table{min-width:960px}
+  table.sched-table thead tr th:nth-child(2),
+  table.sched-table tbody tr td:nth-child(2){display:none}
+}
 table.sched-table th,table.sched-table td{padding:clamp(3px,0.6vh,5px) clamp(5px,1vw,8px);border-right:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);white-space:nowrap}
 table.sched-table td.sv-grid{min-width:20px}
 table.sched-table thead tr.grp th{background:rgba(32,144,224,0.16);color:var(--blue-5);font-size:clamp(8.5px,1.2vh,10px);text-align:center;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
@@ -618,7 +642,7 @@ td.sv-grid{padding:clamp(2px,0.4vh,3px) 1px;text-align:center}
   <div class="embed-wrap embed-wrap-fill hidden sched-scroll" id="vessels-schedule-wrap">
     <div class="sched-wrap">
       <div class="sched-card">
-        <div class="sched-card-hdr"><span class="dot"></span><h3>Service Schedule</h3><span class="sched-sub">5 active services</span></div>
+        <div class="sched-card-hdr"><span class="dot"></span><h3>Service Schedule</h3><span class="sched-sub">5 active services</span><div class="sched-focus-btn" onclick="toggleCardFocus(this)" title="Focus"><i class="ti ti-arrows-maximize"></i></div></div>
         <div class="sched-table-scroll">
         <table class="sched-table">
           <thead>
@@ -700,7 +724,7 @@ td.sv-grid{padding:clamp(2px,0.4vh,3px) 1px;text-align:center}
           <div class="svc-filter-bar-v"><span class="svc-chip active" data-service="AN1" style="--svc-color:#E63946" onclick="toggleService(this)"><i class="chip-dot"></i>AN1</span><span class="svc-chip active" data-service="ATACAMA" style="--svc-color:#234a87" onclick="toggleService(this)"><i class="chip-dot"></i>ATACAMA</span><span class="svc-chip active" data-service="ALPACA" style="--svc-color:#F1C40F" onclick="toggleService(this)"><i class="chip-dot"></i>ALPACA</span><span class="svc-chip active" data-service="CHX2" style="--svc-color:#00B8D9" onclick="toggleService(this)"><i class="chip-dot"></i>CHX2</span><span class="svc-chip active" data-service="WS4" style="--svc-color:#8B5E34" onclick="toggleService(this)"><i class="chip-dot"></i>WS4</span><span class="svc-chip active" data-service="WS3" style="--svc-color:#2E8B57" onclick="toggleService(this)"><i class="chip-dot"></i>WS3</span></div>
         </div>
         <div class="sched-card">
-          <div class="sched-card-hdr"><span class="dot" style="background:#8fd3ff;box-shadow:0 0 8px #8fd3ff"></span><h3>Southbound &mdash; To Iquique</h3></div>
+          <div class="sched-card-hdr"><span class="dot" style="background:#8fd3ff;box-shadow:0 0 8px #8fd3ff"></span><h3>Southbound &mdash; To Iquique</h3><div class="sched-focus-btn" onclick="toggleCardFocus(this)" title="Focus"><i class="ti ti-arrows-maximize"></i></div></div>
           <div class="map-canvas" id="south-map">
             <div class="map-land" data-vb="420 205 950 400"></div>
             <svg class="map-overlay" viewBox="420 205 950 400" xmlns="http://www.w3.org/2000/svg">
@@ -711,7 +735,7 @@ td.sv-grid{padding:clamp(2px,0.4vh,3px) 1px;text-align:center}
           </div>
         </div>
         <div class="sched-card">
-          <div class="sched-card-hdr"><span class="dot" style="background:#ffb38f;box-shadow:0 0 8px #ffb38f"></span><h3>Northbound &mdash; Return to Origin</h3></div>
+          <div class="sched-card-hdr"><span class="dot" style="background:#ffb38f;box-shadow:0 0 8px #ffb38f"></span><h3>Northbound &mdash; Return to Origin</h3><div class="sched-focus-btn" onclick="toggleCardFocus(this)" title="Focus"><i class="ti ti-arrows-maximize"></i></div></div>
           <div class="map-canvas" id="north-map">
             <div class="map-land" data-vb="420 205 950 400"></div>
             <svg class="map-overlay" viewBox="420 205 950 400" xmlns="http://www.w3.org/2000/svg">
@@ -904,6 +928,54 @@ async function mountWorldMap(container) {
   container.appendChild(srcSvg);
   container.dataset.mounted = '1';
 }
+function toggleCardFocus(btn) {
+  const card = btn.closest('.sched-card');
+  if (!card) return;
+  if (card.classList.contains('is-focused')) {
+    closeCardFocus(card);
+    return;
+  }
+  // Cierra cualquier otra tarjeta que haya quedado enfocada antes de abrir
+  // esta — evitaba que se vieran dos tarjetas "focus" superpuestas a la vez.
+  document.querySelectorAll('.sched-card.is-focused').forEach(closeCardFocus);
+  // BUG REAL: el contenedor padre (.embed-wrap) tiene su propio z-index,
+  // lo que crea un contexto de apilamiento propio. Aunque la tarjeta tenga
+  // z-index altísimo, queda "atrapada" dentro de ese contexto y el fondo
+  // oscuro (pegado a <body>) terminaba tapándola igual. Se soluciona
+  // moviendo la tarjeta literalmente al final de <body> mientras dura el
+  // focus, y devolviéndola a su lugar exacto al cerrar.
+  card._origParent = card.parentNode;
+  card._origNext = card.nextSibling;
+  card.classList.add('is-focused');
+  const icon = btn.querySelector('i');
+  if (icon) icon.className = 'ti ti-x';
+  const backdrop = document.createElement('div');
+  backdrop.className = 'sched-focus-backdrop';
+  backdrop.onclick = () => closeCardFocus(card);
+  document.body.appendChild(backdrop);
+  document.body.appendChild(card);
+}
+function closeCardFocus(card) {
+  card.classList.remove('is-focused');
+  const icon = card.querySelector('.sched-focus-btn i');
+  if (icon) icon.className = 'ti ti-arrows-maximize';
+  // Limpia TODOS los fondos oscuros que puedan existir, no solo el último
+  // guardado — así nunca quedan huérfanos aunque algo falle antes.
+  document.querySelectorAll('.sched-focus-backdrop').forEach(b => b.remove());
+  if (card._origParent) {
+    if (card._origNext && card._origNext.parentNode === card._origParent) {
+      card._origParent.insertBefore(card, card._origNext);
+    } else {
+      card._origParent.appendChild(card);
+    }
+  }
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const focused = document.querySelector('.sched-card.is-focused');
+    if (focused) closeCardFocus(focused);
+  }
+});
 function toggleService(chip) {
   const svc = chip.dataset.service;
   chip.classList.toggle('off');
