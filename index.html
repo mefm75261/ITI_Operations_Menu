@@ -516,20 +516,6 @@ td.now-col, th.now-col{background:rgba(20,232,200,0.22)!important}
 th.now-col{color:#fff!important}
 .now-pill{display:inline-block;font-size:7.5px;font-weight:800;letter-spacing:.5px;background:var(--teal-4);color:#022;border-radius:6px;padding:1px 4px;margin-left:4px;vertical-align:middle}
 
-/* --- Live Map tab layout --- */
-.livemap-split{display:flex;gap:14px;width:100%;height:100%;padding:14px}
-.livemap-ais{flex:1;min-width:0;border-radius:12px;overflow:hidden;background:#0a1830;border:1px solid rgba(32,144,224,0.20);position:relative}
-.livemap-ais::before{content:'Loading live map\2026';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:12px;letter-spacing:1px;text-transform:uppercase}
-.livemap-weather{width:230px;flex:0 0 230px;background:rgba(8,24,48,0.75);border:1px solid rgba(32,144,224,0.22);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
-@media(max-width:780px){.livemap-split{flex-direction:column}.livemap-weather{width:100%;flex:0 0 auto}.livemap-ais{min-height:340px}}
-.mw-hdr{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--blue-5);display:flex;align-items:center;gap:6px}
-.mw-sub{font-size:10px;color:rgba(255,255,255,.4)}
-.mw-body{display:flex;flex-direction:column;gap:8px;margin-top:4px}
-.mw-row{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:6px}
-.mw-lbl{font-size:10.5px;color:rgba(255,255,255,.55)}
-.mw-val{font-size:15px;font-weight:800;color:#fff}
-.mw-note{margin-top:auto;font-size:8.5px;color:rgba(255,255,255,.25);line-height:1.4}
-
 /* --- command palette (Ctrl/Cmd+K quick search) --- */
 .cmdk-fab{position:fixed;bottom:20px;right:20px;z-index:500;width:46px;height:46px;border-radius:50%;background:rgba(20,30,50,0.9);border:1px solid rgba(32,144,224,0.4);color:var(--blue-5);display:flex;align-items:center;justify-content:center;font-size:19px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);transition:.15s all}
 .cmdk-fab:hover{background:rgba(32,144,224,0.25);transform:scale(1.06)}
@@ -664,7 +650,6 @@ th.now-col{color:#fff!important}
   <div class="hdr hdr-fill"><div class="hdr-brand"><button class="back-btn back-blue" onclick="goPg('pg-hub')">◄ MENU</button><div class="hdr-pipe hdr-pipe-blue"></div><div><div class="hdr-ttl">Vessel Operations</div></div></div><img class="hdr-logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'"></div>
   <div class="view-panel view-panel-fill">
     <div class="view-tab view-tab-blue" id="vessels-schedule-tab" onclick="showSchedule(this)"><i class="ti ti-calendar-stats"></i>Berth Window</div>
-    <div class="view-tab view-tab-blue" id="vessels-livemap-tab" onclick="showLiveMap(this)"><i class="ti ti-map-2"></i>Live Map</div>
     <div class="view-tab view-tab-blue active" onclick="setFrame(this,'vessels','https://app.powerbi.com/view?r=eyJrIjoiNTdkNmU3NjItZjI5Mi00MTg1LWE0OTEtNmNmOGU1NThiZjUxIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9')" data-full="https://app.powerbi.com/view?r=eyJrIjoiNTdkNmU3NjItZjI5Mi00MTg1LWE0OTEtNmNmOGU1NThiZjUxIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"><i class="ti ti-chart-bar"></i>General Performance</div>
     <div class="view-tab view-tab-blue" onclick="setFrame(this,'vessels','https://app.powerbi.com/view?r=eyJrIjoiMjczMGFlOGEtYTBjYi00ZGRmLWI0NGYtNTgxNTg5Y2JiOTI2IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9')" data-full="https://app.powerbi.com/view?r=eyJrIjoiMjczMGFlOGEtYTBjYi00ZGRmLWI0NGYtNTgxNTg5Y2JiOTI2IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"><i class="ti ti-chart-bar"></i>Operator Performance</div>
     <div class="view-tab view-tab-blue" onclick="setFrame(this,'vessels','https://app.powerbi.com/view?r=eyJrIjoiM2NiNTRiNTctMTcwNC00MDFkLWExY2YtOTg1OGMxOTc4MzZhIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9')" data-full="https://app.powerbi.com/view?r=eyJrIjoiM2NiNTRiNTctMTcwNC00MDFkLWExY2YtOTg1OGMxOTc4MzZhIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"><i class="ti ti-chart-bar"></i>Detentions</div>
@@ -680,22 +665,6 @@ th.now-col{color:#fff!important}
       <div class="pbi-mask-bottom"></div>
       <div class="pbi-fullscreen-btn" onclick="pbiFullscreen('vessels-frame')" title="Full screen"><i class="ti ti-arrows-maximize"></i></div>
       <div class="timeline-fab hidden" id="vessels-timeline-fab" onclick="openTimelineModal()"><i class="ti ti-clock-hour-4"></i>Timeline</div>
-    </div>
-  </div>
-  <div class="embed-wrap embed-wrap-fill hidden" id="vessels-livemap-wrap">
-    <div class="livemap-split">
-      <div id="vesselfinder-container" class="livemap-ais"></div>
-      <div class="livemap-weather" id="marine-weather-card">
-        <div class="mw-hdr"><i class="ti ti-wave-saw-tool"></i> Marine Conditions</div>
-        <div class="mw-sub">Iquique &middot; <span id="mw-updated">loading&hellip;</span></div>
-        <div id="mw-body" class="mw-body">
-          <div class="mw-row"><span class="mw-lbl">Wave height</span><span class="mw-val" id="mw-wave">&mdash;</span></div>
-          <div class="mw-row"><span class="mw-lbl">Swell height</span><span class="mw-val" id="mw-swell">&mdash;</span></div>
-          <div class="mw-row"><span class="mw-lbl">Swell period</span><span class="mw-val" id="mw-period">&mdash;</span></div>
-          <div class="mw-row"><span class="mw-lbl">Wind wave</span><span class="mw-val" id="mw-windwave">&mdash;</span></div>
-        </div>
-        <div class="mw-note">Source: Open-Meteo Marine (free, non-commercial)</div>
-      </div>
     </div>
   </div>
   <div class="embed-wrap embed-wrap-fill hidden sched-scroll" id="vessels-schedule-wrap">
@@ -1127,7 +1096,6 @@ function restoreVesselsTab() {
   try { label = localStorage.getItem('iti_vesselsLastTab'); } catch (e) {}
   if (!label) return;
   if (label === 'Berth Window') { document.getElementById('vessels-schedule-tab').click(); return; }
-  if (label === 'Live Map') { document.getElementById('vessels-livemap-tab').click(); return; }
   document.querySelectorAll('#pg-vessels .view-panel-fill .view-tab').forEach(t => {
     if (t.textContent.trim() === label) t.click();
   });
@@ -1139,64 +1107,6 @@ function showVesselsPanel(panelId) {
     w.classList.toggle('hidden', w.id !== panelId);
   });
   document.getElementById('vessels-open').style.visibility = (panelId === 'vessels-iframe-wrap') ? 'visible' : 'hidden';
-}
-function showLiveMap(btn) {
-  document.getElementById('vessels-frame').src = 'about:blank';
-  showVesselsPanel('vessels-livemap-wrap');
-  btn.parentElement.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  btn.scrollIntoView({inline:'nearest', block:'nearest', behavior:'smooth'});
-  saveVesselsTab('Live Map');
-  const fab = document.getElementById('vessels-timeline-fab');
-  if (fab) fab.classList.add('hidden');
-  mountLiveMap();
-  fetchMarineWeather();
-}
-function mountLiveMap() {
-  const c = document.getElementById('vesselfinder-container');
-  if (!c || c.dataset.mounted) return;
-  c.dataset.mounted = '1';
-  try {
-    const cfg = document.createElement('script');
-    cfg.type = 'text/javascript';
-    cfg.text = 'var width="100%";var height="100%";var latitude="-20.220";var longitude="-70.150";var zoom="9";var names=true;';
-    const loader = document.createElement('script');
-    loader.type = 'text/javascript';
-    loader.src = 'https://www.vesselfinder.com/aismap.js';
-    c.appendChild(cfg);
-    c.appendChild(loader);
-  } catch (e) { console.error('Live map failed to load', e); }
-}
-let _marineWeatherFetched = false;
-async function fetchMarineWeather() {
-  if (_marineWeatherFetched) return;
-  _marineWeatherFetched = true;
-  const updatedEl = document.getElementById('mw-updated');
-  try {
-    const url = 'https://marine-api.open-meteo.com/v1/marine?latitude=-20.22&longitude=-70.15&hourly=wave_height,swell_wave_height,swell_wave_period,wind_wave_height&timezone=auto';
-    const res = await fetch(url);
-    if (!res.ok) throw new Error('bad response ' + res.status);
-    const data = await res.json();
-    const times = data.hourly.time;
-    const now = new Date();
-    const nowKey = now.toISOString().slice(0,13);
-    let idx = times.findIndex(t => t.slice(0,13) === nowKey);
-    if (idx === -1) idx = 0;
-    const wave = data.hourly.wave_height[idx];
-    const swell = data.hourly.swell_wave_height[idx];
-    const period = data.hourly.swell_wave_period[idx];
-    const windwave = data.hourly.wind_wave_height[idx];
-    document.getElementById('mw-wave').textContent = wave != null ? wave.toFixed(1) + ' m' : '—';
-    document.getElementById('mw-swell').textContent = swell != null ? swell.toFixed(1) + ' m' : '—';
-    document.getElementById('mw-period').textContent = period != null ? period.toFixed(0) + ' s' : '—';
-    document.getElementById('mw-windwave').textContent = windwave != null ? windwave.toFixed(1) + ' m' : '—';
-    updatedEl.textContent = 'updated ' + now.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
-  } catch (e) {
-    console.error('Marine weather fetch failed', e);
-    if (updatedEl) updatedEl.textContent = 'unavailable';
-    const body = document.getElementById('mw-body');
-    if (body) body.innerHTML = '<div style="font-size:11px;color:rgba(255,255,255,.4);line-height:1.5">Could not load marine forecast right now. This needs a live connection to open-meteo.com.</div>';
-  }
 }
 
 function mountAllMaps() {
@@ -1286,8 +1196,7 @@ const CMDK_COMMANDS = [
   { label:'Logistics Operations', group:'Menu', action:()=>goPg('pg-cfs') },
 
   { label:'Berth Window', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); document.getElementById('vessels-schedule-tab').click(); } },
-  { label:'Live Map', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); document.getElementById('vessels-livemap-tab').click(); } },
-  { label:'General Performance', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); clickTabByLabel('pg-vessels','General Performance'); } },
+    { label:'General Performance', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); clickTabByLabel('pg-vessels','General Performance'); } },
   { label:'Operator Performance', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); clickTabByLabel('pg-vessels','Operator Performance'); } },
   { label:'Detentions', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); clickTabByLabel('pg-vessels','Detentions'); } },
   { label:'Shift Change', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); document.getElementById('vessels-shiftchange-tab').click(); } },
