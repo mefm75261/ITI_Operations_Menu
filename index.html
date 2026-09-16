@@ -479,7 +479,6 @@ td.sv-grid{padding:clamp(2px,0.4vh,3px) 1px;text-align:center}
   .timeline-modal-card img{width:100%;max-width:none}
   .timeline-modal-hdr .sched-sub-hint{display:block;width:100%;font-size:9.5px;color:rgba(255,255,255,.4);margin-top:2px}
 }
-
 /* ===================== BREAKPOINT POR ALTURA (subsecciones) =====================
    Cubre el caso que el de ancho NO cubre: ventanas anchas pero bajas (zoom del
    navegador alto, escalado de Windows 125-150%, notebooks panorámicos achicados
@@ -503,6 +502,49 @@ td.sv-grid{padding:clamp(2px,0.4vh,3px) 1px;text-align:center}
   .view-panel{gap:2px}
   .view-tab{padding:3px 5px;font-size:8px}
 }
+
+/* ===================== NEW FEATURES CSS ===================== */
+
+/* --- clickable table rows (link to map filter) --- */
+tr.sv-row{cursor:pointer;transition:background .15s}
+tr.sv-row:hover{background:rgba(32,144,224,0.10)!important}
+tr.sv-row.sv-row-active{background:rgba(32,144,224,0.14)!important;box-shadow:inset 3px 0 0 var(--blue-4)}
+
+/* --- today / now highlight in weekly grid --- */
+td.today-col, th.today-col{background:rgba(32,144,224,0.14)!important}
+td.now-col, th.now-col{background:rgba(20,232,200,0.22)!important}
+th.now-col{color:#fff!important}
+.now-pill{display:inline-block;font-size:7.5px;font-weight:800;letter-spacing:.5px;background:var(--teal-4);color:#022;border-radius:6px;padding:1px 4px;margin-left:4px;vertical-align:middle}
+
+/* --- Live Map tab layout --- */
+.livemap-split{display:flex;gap:14px;width:100%;height:100%;padding:14px}
+.livemap-ais{flex:1;min-width:0;border-radius:12px;overflow:hidden;background:#0a1830;border:1px solid rgba(32,144,224,0.20);position:relative}
+.livemap-ais::before{content:'Loading live map\2026';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:12px;letter-spacing:1px;text-transform:uppercase}
+.livemap-weather{width:230px;flex:0 0 230px;background:rgba(8,24,48,0.75);border:1px solid rgba(32,144,224,0.22);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+@media(max-width:780px){.livemap-split{flex-direction:column}.livemap-weather{width:100%;flex:0 0 auto}.livemap-ais{min-height:340px}}
+.mw-hdr{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--blue-5);display:flex;align-items:center;gap:6px}
+.mw-sub{font-size:10px;color:rgba(255,255,255,.4)}
+.mw-body{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.mw-row{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:6px}
+.mw-lbl{font-size:10.5px;color:rgba(255,255,255,.55)}
+.mw-val{font-size:15px;font-weight:800;color:#fff}
+.mw-note{margin-top:auto;font-size:8.5px;color:rgba(255,255,255,.25);line-height:1.4}
+
+/* --- command palette (Ctrl/Cmd+K quick search) --- */
+.cmdk-fab{position:fixed;bottom:20px;right:20px;z-index:500;width:46px;height:46px;border-radius:50%;background:rgba(20,30,50,0.9);border:1px solid rgba(32,144,224,0.4);color:var(--blue-5);display:flex;align-items:center;justify-content:center;font-size:19px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);transition:.15s all}
+.cmdk-fab:hover{background:rgba(32,144,224,0.25);transform:scale(1.06)}
+.cmdk-overlay{position:fixed;inset:0;z-index:9998;background:rgba(3,8,16,0.75);display:flex;align-items:flex-start;justify-content:center;padding:12vh 16px}
+.cmdk-box{width:100%;max-width:560px;background:#0a1830;border:1px solid rgba(32,144,224,0.35);border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.6);overflow:hidden}
+.cmdk-input-wrap{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
+.cmdk-input-wrap i{color:rgba(255,255,255,.4);font-size:16px}
+.cmdk-input{flex:1;background:none;border:none;outline:none;color:#fff;font-size:14px}
+.cmdk-input::placeholder{color:rgba(255,255,255,.3)}
+.cmdk-hint{font-size:9px;color:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:2px 5px}
+.cmdk-list{max-height:50vh;overflow-y:auto;padding:6px}
+.cmdk-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;font-size:12.5px;color:#fff}
+.cmdk-item:hover, .cmdk-item.cmdk-sel{background:rgba(32,144,224,0.18)}
+.cmdk-item .cmdk-group{font-size:9.5px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.5px}
+.cmdk-empty{padding:20px;text-align:center;color:rgba(255,255,255,.3);font-size:12px}
 </style>
 </head>
 <body>
@@ -622,6 +664,7 @@ td.sv-grid{padding:clamp(2px,0.4vh,3px) 1px;text-align:center}
   <div class="hdr hdr-fill"><div class="hdr-brand"><button class="back-btn back-blue" onclick="goPg('pg-hub')">◄ MENU</button><div class="hdr-pipe hdr-pipe-blue"></div><div><div class="hdr-ttl">Vessel Operations</div></div></div><img class="hdr-logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'"></div>
   <div class="view-panel view-panel-fill">
     <div class="view-tab view-tab-blue" id="vessels-schedule-tab" onclick="showSchedule(this)"><i class="ti ti-calendar-stats"></i>Berth Window</div>
+    <div class="view-tab view-tab-blue" id="vessels-livemap-tab" onclick="showLiveMap(this)"><i class="ti ti-map-2"></i>Live Map</div>
     <div class="view-tab view-tab-blue active" onclick="setFrame(this,'vessels','https://app.powerbi.com/view?r=eyJrIjoiNTdkNmU3NjItZjI5Mi00MTg1LWE0OTEtNmNmOGU1NThiZjUxIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9')" data-full="https://app.powerbi.com/view?r=eyJrIjoiNTdkNmU3NjItZjI5Mi00MTg1LWE0OTEtNmNmOGU1NThiZjUxIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"><i class="ti ti-chart-bar"></i>General Performance</div>
     <div class="view-tab view-tab-blue" onclick="setFrame(this,'vessels','https://app.powerbi.com/view?r=eyJrIjoiMjczMGFlOGEtYTBjYi00ZGRmLWI0NGYtNTgxNTg5Y2JiOTI2IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9')" data-full="https://app.powerbi.com/view?r=eyJrIjoiMjczMGFlOGEtYTBjYi00ZGRmLWI0NGYtNTgxNTg5Y2JiOTI2IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"><i class="ti ti-chart-bar"></i>Operator Performance</div>
     <div class="view-tab view-tab-blue" onclick="setFrame(this,'vessels','https://app.powerbi.com/view?r=eyJrIjoiM2NiNTRiNTctMTcwNC00MDFkLWExY2YtOTg1OGMxOTc4MzZhIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9')" data-full="https://app.powerbi.com/view?r=eyJrIjoiM2NiNTRiNTctMTcwNC00MDFkLWExY2YtOTg1OGMxOTc4MzZhIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"><i class="ti ti-chart-bar"></i>Detentions</div>
@@ -631,12 +674,28 @@ td.sv-grid{padding:clamp(2px,0.4vh,3px) 1px;text-align:center}
     <div class="view-tab view-tab-blue" onclick="setFrame(this,'vessels','https://strenaterminals-my.sharepoint.com/personal/btapia_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B236A26FB-62A1-49E0-B742-19B88D799763%7D&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True','https://strenaterminals-my.sharepoint.com/:x:/r/personal/btapia_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B236A26FB-62A1-49E0-B742-19B88D799763%7D&file=Planificaci%25u00f3n%20Naviera.xlsm&fromShare=true&action=default&mobileredirect=true')" data-full="https://strenaterminals-my.sharepoint.com/:x:/r/personal/btapia_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B236A26FB-62A1-49E0-B742-19B88D799763%7D&file=Planificaci%25u00f3n%20Naviera.xlsm&fromShare=true&action=default&mobileredirect=true"><i class="ti ti-table"></i>Planification</div>
     <a class="view-open-link view-open-link-blue" id="vessels-open" href="https://app.powerbi.com/view?r=eyJrIjoiNTdkNmU3NjItZjI5Mi00MTg1LWE0OTEtNmNmOGU1NThiZjUxIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" target="_blank"><span class="view-open-link-text">Open</span> <i class="ti ti-external-link"></i></a>
   </div>
-  <div class="embed-wrap embed-wrap-fill">
+  <div class="embed-wrap embed-wrap-fill" id="vessels-iframe-wrap">
     <div class="pbi-wrap" id="vessels-pbi-wrap">
       <iframe class="embed-frame embed-frame-fill" id="vessels-frame" src="https://app.powerbi.com/view?r=eyJrIjoiNTdkNmU3NjItZjI5Mi00MTg1LWE0OTEtNmNmOGU1NThiZjUxIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" allowfullscreen></iframe>
       <div class="pbi-mask-bottom"></div>
       <div class="pbi-fullscreen-btn" onclick="pbiFullscreen('vessels-frame')" title="Full screen"><i class="ti ti-arrows-maximize"></i></div>
       <div class="timeline-fab hidden" id="vessels-timeline-fab" onclick="openTimelineModal()"><i class="ti ti-clock-hour-4"></i>Timeline</div>
+    </div>
+  </div>
+  <div class="embed-wrap embed-wrap-fill hidden" id="vessels-livemap-wrap">
+    <div class="livemap-split">
+      <div id="vesselfinder-container" class="livemap-ais"></div>
+      <div class="livemap-weather" id="marine-weather-card">
+        <div class="mw-hdr"><i class="ti ti-wave-saw-tool"></i> Marine Conditions</div>
+        <div class="mw-sub">Iquique &middot; <span id="mw-updated">loading&hellip;</span></div>
+        <div id="mw-body" class="mw-body">
+          <div class="mw-row"><span class="mw-lbl">Wave height</span><span class="mw-val" id="mw-wave">&mdash;</span></div>
+          <div class="mw-row"><span class="mw-lbl">Swell height</span><span class="mw-val" id="mw-swell">&mdash;</span></div>
+          <div class="mw-row"><span class="mw-lbl">Swell period</span><span class="mw-val" id="mw-period">&mdash;</span></div>
+          <div class="mw-row"><span class="mw-lbl">Wind wave</span><span class="mw-val" id="mw-windwave">&mdash;</span></div>
+        </div>
+        <div class="mw-note">Source: Open-Meteo Marine (free, non-commercial)</div>
+      </div>
     </div>
   </div>
   <div class="embed-wrap embed-wrap-fill hidden sched-scroll" id="vessels-schedule-wrap">
@@ -650,8 +709,8 @@ td.sv-grid{padding:clamp(2px,0.4vh,3px) 1px;text-align:center}
               <th style="text-align:left">SERVICE</th>
               <th style="text-align:left">PORT ROTATION</th>
               <th>MOVES</th><th>ETB</th><th>ETD</th>
-              <th colspan="3">MON</th><th colspan="3">TUE</th><th colspan="3">WED</th>
-              <th colspan="3">THU</th><th colspan="3">FRI</th><th colspan="3">SAT</th><th colspan="3">SUN</th>
+              <th colspan="3" data-day="Mon">MON</th><th colspan="3" data-day="Tue">TUE</th><th colspan="3" data-day="Wed">WED</th>
+              <th colspan="3" data-day="Thu">THU</th><th colspan="3" data-day="Fri">FRI</th><th colspan="3" data-day="Sat">SAT</th><th colspan="3" data-day="Sun">SUN</th>
               <th>PIER</th><th>FREQ.</th><th>LINES</th>
             </tr>
             <tr class="sub">
@@ -661,7 +720,7 @@ td.sv-grid{padding:clamp(2px,0.4vh,3px) 1px;text-align:center}
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr class="sv-row" data-service="AN1" onclick="focusServiceOnMaps(this)" title="Click to filter on the route maps below">
         <td class="sv-name">AN1<span class="sv-tag main">MAINLINER</span></td>
         <td class="sv-rot"><span>CNHKG</span><span class="sep">&rsaquo;</span><wbr><span>CNYTN</span><span class="sep">&rsaquo;</span><wbr><span>TWKEL</span><span class="sep">&rsaquo;</span><wbr><span>CNSHA</span><span class="sep">&rsaquo;</span><wbr><span>CNNBO</span><span class="sep">&rsaquo;</span><wbr><span>KRPUS</span><span class="sep">&rsaquo;</span><wbr><span>MXZLO</span><span class="sep">&rsaquo;</span><wbr><span>MXLZC</span><span class="sep">&rsaquo;</span><wbr><span>PECLL</span><span class="sep">&rsaquo;</span><wbr><span class="hub">CLIQQ</span><span class="sep">&rsaquo;</span><wbr><span>CLPAG</span><span class="sep">&rsaquo;</span><wbr><span>CLVAP</span><span class="sep">&rsaquo;</span><wbr><span>CLSVE</span></td>
         <td class="sv-moves">2000</td>
@@ -671,7 +730,7 @@ td.sv-grid{padding:clamp(2px,0.4vh,3px) 1px;text-align:center}
         <td><span class="sv-pier">Pier 4</span></td>
         <td><span class="sv-freq wk">Weekly</span></td>
         <td class="sv-lines"><b>MSC</b> | <b>HLC</b> | <b>HMM</b> | <b>ONE</b></td>
-    </tr><tr>
+    </tr><tr class="sv-row" data-service="ATACAMA" onclick="focusServiceOnMaps(this)" title="Click to filter on the route maps below">
         <td class="sv-name">ATACAMA<span class="sv-tag feed">FEEDER</span></td>
         <td class="sv-rot"><span>CLARI</span><span class="sep">&rsaquo;</span><wbr><span class="hub">CLIQQ</span><span class="sep">&rsaquo;</span><wbr><span>CLSAI</span><span class="sep">&rsaquo;</span><wbr><span>CLSVE</span><span class="sep">&rsaquo;</span><wbr><span>CLCQQ</span><span class="sep">&rsaquo;</span><wbr><span>PECLL</span><span class="sep">&rsaquo;</span><wbr><span>PABLB</span></td>
         <td class="sv-moves">450</td>
@@ -681,7 +740,7 @@ td.sv-grid{padding:clamp(2px,0.4vh,3px) 1px;text-align:center}
         <td><span class="sv-pier">Pier 4</span></td>
         <td><span class="sv-freq wk">Weekly</span></td>
         <td class="sv-lines"><b>MSK</b></td>
-    </tr><tr>
+    </tr><tr class="sv-row" data-service="ALPACA" onclick="focusServiceOnMaps(this)" title="Click to filter on the route maps below">
         <td class="sv-name">ALPACA<span class="sv-tag main">MAINLINER</span></td>
         <td class="sv-rot"><span>CNNBO</span><span class="sep">&rsaquo;</span><wbr><span>KRPUS</span><span class="sep">&rsaquo;</span><wbr><span>PECLL</span><span class="sep">&rsaquo;</span><wbr><span>CLARI</span><span class="sep">&rsaquo;</span><wbr><span class="hub">CLIQQ</span><span class="sep">&rsaquo;</span><wbr><span>CLSAI</span><span class="sep">&rsaquo;</span><wbr><span>CNNSA</span><span class="sep">&rsaquo;</span><wbr><span>CNHKG</span></td>
         <td class="sv-moves">2500</td>
@@ -691,7 +750,7 @@ td.sv-grid{padding:clamp(2px,0.4vh,3px) 1px;text-align:center}
         <td><span class="sv-pier">Pier 4</span></td>
         <td><span class="sv-freq wk">Weekly</span></td>
         <td class="sv-lines"><b>MSC</b></td>
-    </tr><tr>
+    </tr><tr class="sv-row" data-service="CHX2" onclick="focusServiceOnMaps(this)" title="Click to filter on the route maps below">
         <td class="sv-name">CHX2<span class="sv-tag feed">FEEDER</span></td>
         <td class="sv-rot"><span>PECLL</span><span class="sep">&rsaquo;</span><wbr><span class="hub">CLIQQ</span><span class="sep">&rsaquo;</span><wbr><span>CLARI</span><span class="sep">&rsaquo;</span><wbr><span>PEILQ</span><span class="sep">&rsaquo;</span><wbr><span>PECHY</span></td>
         <td class="sv-moves">250</td>
@@ -701,7 +760,7 @@ td.sv-grid{padding:clamp(2px,0.4vh,3px) 1px;text-align:center}
         <td><span class="sv-pier">Pier 3</span></td>
         <td><span class="sv-freq wk">Weekly</span></td>
         <td class="sv-lines"><b>CMA</b> | <b>EVE</b> | <b>COS</b></td>
-    </tr><tr>
+    </tr><tr class="sv-row" data-service="WS4,WS3" onclick="focusServiceOnMaps(this)" title="Click to filter on the route maps below">
         <td class="sv-name">WS4/WS3<span class="sv-tag feed">FEEDER</span></td>
         <td class="sv-rot"><span>PECLL</span><span class="sep">&rsaquo;</span><wbr><span class="hub">CLIQQ</span><span class="sep">&rsaquo;</span><wbr><span>CLANF</span><span class="sep">&rsaquo;</span><wbr><span>CLPAG</span><span class="sep">&rsaquo;</span><wbr><span>CLARI</span><span class="sep">&rsaquo;</span><wbr><span>PEMRI</span></td>
         <td class="sv-moves">400</td>
@@ -720,7 +779,7 @@ td.sv-grid{padding:clamp(2px,0.4vh,3px) 1px;text-align:center}
 <div class="sched-maps">
         <div class="sched-card svc-sidebar">
           <div class="sched-card-hdr"><span class="dot" style="background:var(--blue-4);box-shadow:0 0 8px var(--blue-4)"></span><h3>Routes</h3></div>
-          <div class="sched-sub" style="padding:0 14px 8px;display:block;font-size:9.5px;color:rgba(255,255,255,.35);letter-spacing:.5px;text-transform:uppercase">Click a chip to filter</div>
+          <div class="sched-sub" style="padding:0 14px 8px;display:block;font-size:9.5px;color:rgba(255,255,255,.35);letter-spacing:.5px;text-transform:uppercase">Click a chip or row &middot; <a href="javascript:void(0)" onclick="showAllServices()" style="color:var(--blue-5);text-decoration:underline;text-transform:none;letter-spacing:0">show all</a></div>
           <div class="svc-filter-bar-v"><span class="svc-chip active" data-service="AN1" style="--svc-color:#E63946" onclick="toggleService(this)"><i class="chip-dot"></i>AN1</span><span class="svc-chip active" data-service="ATACAMA" style="--svc-color:#234a87" onclick="toggleService(this)"><i class="chip-dot"></i>ATACAMA</span><span class="svc-chip active" data-service="ALPACA" style="--svc-color:#F1C40F" onclick="toggleService(this)"><i class="chip-dot"></i>ALPACA</span><span class="svc-chip active" data-service="CHX2" style="--svc-color:#00B8D9" onclick="toggleService(this)"><i class="chip-dot"></i>CHX2</span><span class="svc-chip active" data-service="WS4" style="--svc-color:#8B5E34" onclick="toggleService(this)"><i class="chip-dot"></i>WS4</span><span class="svc-chip active" data-service="WS3" style="--svc-color:#2E8B57" onclick="toggleService(this)"><i class="chip-dot"></i>WS3</span></div>
         </div>
         <div class="sched-card">
@@ -756,9 +815,7 @@ td.sv-grid{padding:clamp(2px,0.4vh,3px) 1px;text-align:center}
     <div class="view-panel view-panel-fill">
     <div class="view-tab view-tab-red active" onclick="setFrame(this,'yard','https://app.powerbi.com/view?r=eyJrIjoiOWY4ZjAxYzItZDc2ZC00YWExLTg0MzctOTEyOWU3YmEzMmY1IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9')" data-full="https://app.powerbi.com/view?r=eyJrIjoiOWY4ZjAxYzItZDc2ZC00YWExLTg0MzctOTEyOWU3YmEzMmY1IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"><i class="ti ti-chart-bar"></i>Yard Information</div>
     <div class="view-tab view-tab-red active" onclick="setFrame(this,'yard','https://app.powerbi.com/view?r=eyJrIjoiMWJhODgzYjYtNDJmMy00YTRhLWIzZTAtOTNlZjkzNTkyNDM0IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9')" data-full="https://app.powerbi.com/view?r=eyJrIjoiMWJhODgzYjYtNDJmMy00YTRhLWIzZTAtOTNlZjkzNTkyNDM0IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"><i class="ti ti-chart-bar"></i>Truck Flow</div>
-
     <div class="view-tab view-tab-red" onclick="setFrame(this,'yard','https://strenaterminals-my.sharepoint.com/personal/gmarquez_iti_cl/_layouts/15/Doc.aspx?sourcedoc={5719949c-8a74-4236-9f8a-1f8764638cb0}&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True')" data-full="https://strenaterminals-my.sharepoint.com/:x:/r/personal/gmarquez_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B5719949C-8A74-4236-9F8A-1F8764638CB0%7D&file=proyecci%25u00f3n%20In-Out.xlsx&fromShare=true&action=default&mobileredirect=true"><i class="ti ti-table"></i>Projection IN-OUT</div>
-
     <div class="view-tab view-tab-red" onclick="setFrame(this,'yard','https://strenaterminals-my.sharepoint.com/personal/btapia_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B811E1B41-09A1-49DE-948E-7FBE4EAE31D2%7D&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True')" data-full="https://strenaterminals-my.sharepoint.com/:x:/r/personal/btapia_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B811E1B41-09A1-49DE-948E-7FBE4EAE31D2%7D&file=PROGRAMACI%C3%93N%20STACKING.xlsx&action=default&mobileredirect=true&DefaultItemOpen=1&web=1"><i class="ti ti-table"></i>Stacking Plan</div>
     <div class="view-tab view-tab-red" id="yard-dispatch-tab" onclick="setFrame(this,'yard','https://strenaterminals-my.sharepoint.com/personal/mfloresm_iti_cl/_layouts/15/Doc.aspx?sourcedoc={61062705-013f-42e2-b988-0166b8d0df08}&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True&waccluster=AE3&edaebp=&edaebf=res50')" data-full="https://strenaterminals-my.sharepoint.com/:x:/r/personal/mfloresm_iti_cl/Documents/Secuencias%20operaciones%20terrestres/Dispatch%20Plan.xlsx?d=w61062705013f42e2b9880166b8d0df08&csf=1&web=1&e=7wVc4c">
       <i class="ti ti-table"></i>Dispatch Plan
@@ -855,6 +912,7 @@ function goPg(id) {
     frame.src = '';
     requestAnimationFrame(() => { frame.src = currentSrc; });
   }
+  if (id === 'pg-vessels') { restoreVesselsTab(); }
 }
 const CATEGORIAS_PATIO = [
   {label: "Indirectos 1er Turno", folder: "1.-INDIRECTOS 1\u00b0TURNO"},
@@ -979,14 +1037,168 @@ document.addEventListener('keydown', (e) => {
     if (focused) closeCardFocus(focused);
   }
 });
-function toggleService(chip) {
-  const svc = chip.dataset.service;
-  chip.classList.toggle('off');
-  const isOff = chip.classList.contains('off');
+/* ================= Service filter (chips) + persistence ================= */
+function setServiceActive(svc, active) {
+  document.querySelectorAll(`.svc-chip[data-service="${svc}"]`).forEach(chip => {
+    chip.classList.toggle('off', !active);
+  });
   document.querySelectorAll(`.svc-route[data-service="${svc}"]`).forEach(el => {
-    el.style.display = isOff ? 'none' : '';
+    el.style.display = active ? '' : 'none';
   });
 }
+function saveServiceFilters() {
+  const state = {};
+  document.querySelectorAll('.svc-filter-bar-v .svc-chip').forEach(c => {
+    state[c.dataset.service] = !c.classList.contains('off');
+  });
+  try { localStorage.setItem('iti_svcFilters', JSON.stringify(state)); } catch (e) {}
+}
+function restoreServiceFilters() {
+  let state = null;
+  try { state = JSON.parse(localStorage.getItem('iti_svcFilters') || 'null'); } catch (e) {}
+  if (!state) return;
+  Object.keys(state).forEach(svc => setServiceActive(svc, state[svc]));
+}
+function toggleService(chip) {
+  const svc = chip.dataset.service;
+  const willBeActive = chip.classList.contains('off');
+  setServiceActive(svc, willBeActive);
+  document.querySelectorAll('tr.sv-row').forEach(r => r.classList.remove('sv-row-active'));
+  saveServiceFilters();
+}
+function showAllServices() {
+  document.querySelectorAll('.svc-filter-bar-v .svc-chip').forEach(c => setServiceActive(c.dataset.service, true));
+  document.querySelectorAll('tr.sv-row').forEach(r => r.classList.remove('sv-row-active'));
+  saveServiceFilters();
+}
+function focusServiceOnMaps(row) {
+  const svcList = row.dataset.service.split(',');
+  document.querySelectorAll('.svc-filter-bar-v .svc-chip').forEach(c => {
+    setServiceActive(c.dataset.service, svcList.includes(c.dataset.service));
+  });
+  document.querySelectorAll('tr.sv-row').forEach(r => r.classList.toggle('sv-row-active', r === row));
+  saveServiceFilters();
+  const mapsEl = document.querySelector('.sched-maps');
+  if (mapsEl) mapsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ================= Today / Now highlight in the weekly grid ================= */
+function highlightTodayColumn() {
+  const parts = getChileNow();
+  const dayColStart = { Mon:6, Tue:9, Wed:12, Thu:15, Fri:18, Sat:21, Sun:24 }[parts.weekday];
+  document.querySelectorAll('table.sched-table .today-col, table.sched-table .now-col').forEach(el => {
+    el.classList.remove('today-col','now-col');
+  });
+  document.querySelectorAll('table.sched-table .now-pill').forEach(el => el.remove());
+  if (!dayColStart) return;
+  const dayHeader = document.querySelector(`table.sched-table [data-day="${parts.weekday}"]`);
+  if (dayHeader) dayHeader.classList.add('today-col');
+  const hour = parseInt(parts.hour, 10);
+  let shift = 1;
+  if (hour >= 8 && hour < 16) shift = 2; else if (hour >= 16) shift = 3;
+  const nowCol = dayColStart + (shift - 1);
+  for (let col = dayColStart; col < dayColStart + 3; col++) {
+    document.querySelectorAll(`table.sched-table thead tr.sub th:nth-child(${col})`).forEach(th => th.classList.add('today-col'));
+    document.querySelectorAll(`table.sched-table tbody tr td:nth-child(${col})`).forEach(td => td.classList.add('today-col'));
+  }
+  document.querySelectorAll(`table.sched-table thead tr.sub th:nth-child(${nowCol})`).forEach(th => {
+    th.classList.add('now-col');
+    th.insertAdjacentHTML('beforeend', ' <span class="now-pill">NOW</span>');
+  });
+  document.querySelectorAll(`table.sched-table tbody tr td:nth-child(${nowCol})`).forEach(td => td.classList.add('now-col'));
+}
+function getChileNow() {
+  const fmt = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Santiago', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false
+  });
+  const parts = {};
+  fmt.formatToParts(new Date()).forEach(p => { parts[p.type] = p.value; });
+  parts.weekday = parts.weekday.slice(0,3);
+  if (parts.hour === '24') parts.hour = '00';
+  return parts;
+}
+
+/* ================= Vessel Operations: last tab remembered ================= */
+function saveVesselsTab(label) {
+  try { localStorage.setItem('iti_vesselsLastTab', label); } catch (e) {}
+}
+function restoreVesselsTab() {
+  let label = null;
+  try { label = localStorage.getItem('iti_vesselsLastTab'); } catch (e) {}
+  if (!label) return;
+  if (label === 'Berth Window') { document.getElementById('vessels-schedule-tab').click(); return; }
+  if (label === 'Live Map') { document.getElementById('vessels-livemap-tab').click(); return; }
+  document.querySelectorAll('#pg-vessels .view-panel-fill .view-tab').forEach(t => {
+    if (t.textContent.trim() === label) t.click();
+  });
+}
+
+/* ================= Live Map + Marine weather ================= */
+function showVesselsPanel(panelId) {
+  document.querySelectorAll('#pg-vessels .embed-wrap-fill').forEach(w => {
+    w.classList.toggle('hidden', w.id !== panelId);
+  });
+  document.getElementById('vessels-open').style.visibility = (panelId === 'vessels-iframe-wrap') ? 'visible' : 'hidden';
+}
+function showLiveMap(btn) {
+  document.getElementById('vessels-frame').src = 'about:blank';
+  showVesselsPanel('vessels-livemap-wrap');
+  btn.parentElement.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  btn.scrollIntoView({inline:'nearest', block:'nearest', behavior:'smooth'});
+  saveVesselsTab('Live Map');
+  const fab = document.getElementById('vessels-timeline-fab');
+  if (fab) fab.classList.add('hidden');
+  mountLiveMap();
+  fetchMarineWeather();
+}
+function mountLiveMap() {
+  const c = document.getElementById('vesselfinder-container');
+  if (!c || c.dataset.mounted) return;
+  c.dataset.mounted = '1';
+  try {
+    const cfg = document.createElement('script');
+    cfg.type = 'text/javascript';
+    cfg.text = 'var width="100%";var height="100%";var latitude="-20.220";var longitude="-70.150";var zoom="9";var names=true;';
+    const loader = document.createElement('script');
+    loader.type = 'text/javascript';
+    loader.src = 'https://www.vesselfinder.com/aismap.js';
+    c.appendChild(cfg);
+    c.appendChild(loader);
+  } catch (e) { console.error('Live map failed to load', e); }
+}
+let _marineWeatherFetched = false;
+async function fetchMarineWeather() {
+  if (_marineWeatherFetched) return;
+  _marineWeatherFetched = true;
+  const updatedEl = document.getElementById('mw-updated');
+  try {
+    const url = 'https://marine-api.open-meteo.com/v1/marine?latitude=-20.22&longitude=-70.15&hourly=wave_height,swell_wave_height,swell_wave_period,wind_wave_height&timezone=auto';
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('bad response ' + res.status);
+    const data = await res.json();
+    const times = data.hourly.time;
+    const now = new Date();
+    const nowKey = now.toISOString().slice(0,13);
+    let idx = times.findIndex(t => t.slice(0,13) === nowKey);
+    if (idx === -1) idx = 0;
+    const wave = data.hourly.wave_height[idx];
+    const swell = data.hourly.swell_wave_height[idx];
+    const period = data.hourly.swell_wave_period[idx];
+    const windwave = data.hourly.wind_wave_height[idx];
+    document.getElementById('mw-wave').textContent = wave != null ? wave.toFixed(1) + ' m' : '—';
+    document.getElementById('mw-swell').textContent = swell != null ? swell.toFixed(1) + ' m' : '—';
+    document.getElementById('mw-period').textContent = period != null ? period.toFixed(0) + ' s' : '—';
+    document.getElementById('mw-windwave').textContent = windwave != null ? windwave.toFixed(1) + ' m' : '—';
+    updatedEl.textContent = 'updated ' + now.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+  } catch (e) {
+    console.error('Marine weather fetch failed', e);
+    if (updatedEl) updatedEl.textContent = 'unavailable';
+    const body = document.getElementById('mw-body');
+    if (body) body.innerHTML = '<div style="font-size:11px;color:rgba(255,255,255,.4);line-height:1.5">Could not load marine forecast right now. This needs a live connection to open-meteo.com.</div>';
+  }
+}
+
 function mountAllMaps() {
   document.querySelectorAll('.map-land').forEach(mountWorldMap);
   buildWS4Diagram();
@@ -1016,25 +1228,20 @@ function buildWS4Diagram() {
 }
 function showSchedule(btn) {
   document.getElementById('vessels-frame').src = 'about:blank';
-  document.getElementById('vessels-schedule-wrap').classList.remove('hidden');
-  document.querySelectorAll('#pg-vessels .embed-wrap-fill').forEach(w => {
-    if (w.id !== 'vessels-schedule-wrap') w.classList.add('hidden');
-  });
+  showVesselsPanel('vessels-schedule-wrap');
   btn.parentElement.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
   btn.scrollIntoView({inline:'nearest', block:'nearest', behavior:'smooth'});
-  document.getElementById('vessels-open').style.visibility = 'hidden';
+  saveVesselsTab('Berth Window');
   const fab = document.getElementById('vessels-timeline-fab');
   if (fab) fab.classList.add('hidden');
   mountAllMaps();
+  restoreServiceFilters();
+  highlightTodayColumn();
 }
 function setFrame(btn, area, url) {
   if (area === 'vessels') {
-    document.getElementById('vessels-schedule-wrap').classList.add('hidden');
-    document.querySelectorAll('#pg-vessels .embed-wrap-fill').forEach(w => {
-      if (w.id !== 'vessels-schedule-wrap') w.classList.remove('hidden');
-    });
-    document.getElementById('vessels-open').style.visibility = 'visible';
+    showVesselsPanel('vessels-iframe-wrap');
   }
   const full = btn.dataset.full || url;
   document.getElementById(area + '-frame').src = url;
@@ -1049,10 +1256,13 @@ function setFrame(btn, area, url) {
   if (area === 'yard') {
     document.getElementById('yard-buscador-panel').classList.add('hidden');
   }
-  const fab = document.getElementById('vessels-timeline-fab');
-  if (fab) {
-    if (btn.id === 'vessels-shiftchange-tab') fab.classList.remove('hidden');
-    else fab.classList.add('hidden');
+  if (area === 'vessels') {
+    saveVesselsTab(btn.textContent.trim());
+    const fab = document.getElementById('vessels-timeline-fab');
+    if (fab) {
+      if (btn.id === 'vessels-shiftchange-tab') fab.classList.remove('hidden');
+      else fab.classList.add('hidden');
+    }
   }
 }
 function pbiFullscreen(frameId) {
@@ -1067,9 +1277,116 @@ function openTimelineModal() {
 function closeTimelineModal() {
   document.getElementById('timeline-modal').classList.add('hidden');
 }
+
+/* ================= Command palette (Ctrl/Cmd+K) ================= */
+const CMDK_COMMANDS = [
+  { label:'General Operations', group:'Menu', action:()=>goPg('pg-general') },
+  { label:'Vessel Operations', group:'Menu', action:()=>goPg('pg-vessels') },
+  { label:'Yard Operations', group:'Menu', action:()=>goPg('pg-yard') },
+  { label:'Logistics Operations', group:'Menu', action:()=>goPg('pg-cfs') },
+
+  { label:'Berth Window', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); document.getElementById('vessels-schedule-tab').click(); } },
+  { label:'Live Map', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); document.getElementById('vessels-livemap-tab').click(); } },
+  { label:'General Performance', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); clickTabByLabel('pg-vessels','General Performance'); } },
+  { label:'Operator Performance', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); clickTabByLabel('pg-vessels','Operator Performance'); } },
+  { label:'Detentions', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); clickTabByLabel('pg-vessels','Detentions'); } },
+  { label:'Shift Change', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); document.getElementById('vessels-shiftchange-tab').click(); } },
+  { label:'Pier & Vessels Inf.', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); clickTabByLabel('pg-vessels','Pier & Vessels'); } },
+  { label:'Vessel Milestones', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); clickTabByLabel('pg-vessels','Vessel Milestones'); } },
+  { label:'Planification (Vessel)', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); clickTabByLabel('pg-vessels','Planification'); } },
+
+  { label:'Yard Information', group:'Yard Operations', action:()=>{ goPg('pg-yard'); clickTabByLabel('pg-yard','Yard Information'); } },
+  { label:'Truck Flow', group:'Yard Operations', action:()=>{ goPg('pg-yard'); clickTabByLabel('pg-yard','Truck Flow'); } },
+  { label:'Projection IN-OUT', group:'Yard Operations', action:()=>{ goPg('pg-yard'); clickTabByLabel('pg-yard','Projection'); } },
+  { label:'Stacking Plan', group:'Yard Operations', action:()=>{ goPg('pg-yard'); clickTabByLabel('pg-yard','Stacking Plan'); } },
+  { label:'Dispatch Plan', group:'Yard Operations', action:()=>{ goPg('pg-yard'); clickTabByLabel('pg-yard','Dispatch Plan'); } },
+
+  { label:'CFS', group:'Logistics Operations', action:()=>{ goPg('pg-cfs'); clickTabByLabel('pg-cfs','CFS'); } },
+  { label:'Documental', group:'Logistics Operations', action:()=>{ goPg('pg-cfs'); clickTabByLabel('pg-cfs','Documental'); } },
+  { label:'Planification (CFS)', group:'Logistics Operations', action:()=>{ goPg('pg-cfs'); clickTabByLabel('pg-cfs','Planification'); } },
+  { label:'Program', group:'Logistics Operations', action:()=>{ goPg('pg-cfs'); clickTabByLabel('pg-cfs','Program'); } },
+
+  { label:'General Planification', group:'General Operations', action:()=>{ goPg('pg-general'); clickTabByLabel('pg-general','General Planification'); } },
+  { label:'Formats WK. and MO.', group:'General Operations', action:()=>{ goPg('pg-general'); clickTabByLabel('pg-general','Formats'); } },
+  { label:'Weekly Meetings', group:'General Operations', action:()=>{ goPg('pg-general'); clickTabByLabel('pg-general','Weekly Meetings'); } },
+];
+function clickTabByLabel(pageId, label) {
+  const page = document.getElementById(pageId);
+  if (!page) return;
+  const tabs = page.querySelectorAll('.view-tab');
+  for (const t of tabs) {
+    if (t.textContent.trim().toUpperCase().includes(label.toUpperCase())) { t.click(); return; }
+  }
+}
+let cmdkSelIndex = 0;
+function renderCmdK(filter) {
+  const list = document.getElementById('cmdk-list');
+  const f = (filter || '').toLowerCase();
+  const matches = CMDK_COMMANDS.filter(c => c.label.toLowerCase().includes(f) || c.group.toLowerCase().includes(f));
+  if (!matches.length) {
+    list.innerHTML = '<div class="cmdk-empty">No matches</div>';
+    return;
+  }
+  cmdkSelIndex = 0;
+  list.innerHTML = matches.map((c,i) => `<div class="cmdk-item${i===0?' cmdk-sel':''}" data-idx="${i}">${c.label}<span class="cmdk-group">${c.group}</span></div>`).join('');
+  list.querySelectorAll('.cmdk-item').forEach((el,i) => {
+    el.addEventListener('click', () => { matches[i].action(); closeCmdK(); });
+  });
+  list._matches = matches;
+}
+function openCmdK() {
+  const overlay = document.getElementById('cmdk-overlay');
+  overlay.classList.remove('hidden');
+  const input = document.getElementById('cmdk-input');
+  input.value = '';
+  renderCmdK('');
+  setTimeout(() => input.focus(), 30);
+}
+function closeCmdK() {
+  document.getElementById('cmdk-overlay').classList.add('hidden');
+}
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeTimelineModal();
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault();
+    const overlay = document.getElementById('cmdk-overlay');
+    overlay.classList.contains('hidden') ? openCmdK() : closeCmdK();
+    return;
+  }
+  if (e.key === 'Escape') {
+    closeTimelineModal();
+    closeCmdK();
+    const focused = document.querySelector('.sched-card.is-focused');
+    if (focused) closeCardFocus(focused);
+  }
+  const overlay = document.getElementById('cmdk-overlay');
+  if (overlay && !overlay.classList.contains('hidden')) {
+    const list = document.getElementById('cmdk-list');
+    const items = list.querySelectorAll('.cmdk-item');
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (!items.length) return;
+      items[cmdkSelIndex]?.classList.remove('cmdk-sel');
+      cmdkSelIndex = e.key === 'ArrowDown' ? Math.min(cmdkSelIndex+1, items.length-1) : Math.max(cmdkSelIndex-1, 0);
+      items[cmdkSelIndex]?.classList.add('cmdk-sel');
+      items[cmdkSelIndex]?.scrollIntoView({ block:'nearest' });
+    } else if (e.key === 'Enter') {
+      if (list._matches && list._matches[cmdkSelIndex]) {
+        list._matches[cmdkSelIndex].action();
+        closeCmdK();
+      }
+    }
+  }
 });
+document.addEventListener('input', (e) => {
+  if (e.target && e.target.id === 'cmdk-input') renderCmdK(e.target.value);
+});
+
+/* ================= Init on load ================= */
+document.addEventListener('DOMContentLoaded', () => {
+  restoreServiceFilters();
+  setInterval(highlightTodayColumn, 60000);
+});
+
 const MESES_CARPETA_CFS = ["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"];
 const MESES_DISPLAY_CFS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 function buscarClickCFS(event) {
@@ -1130,6 +1447,18 @@ function listarMesesCFS() {
   }
 }
 </script>
+<div class="cmdk-fab" onclick="openCmdK()" title="Quick search (Ctrl/Cmd+K)"><i class="ti ti-search"></i></div>
+<div id="cmdk-overlay" class="cmdk-overlay hidden" onclick="if(event.target===this) closeCmdK()">
+  <div class="cmdk-box">
+    <div class="cmdk-input-wrap">
+      <i class="ti ti-search"></i>
+      <input type="text" id="cmdk-input" class="cmdk-input" placeholder="Jump to a report or section..." autocomplete="off">
+      <span class="cmdk-hint">ESC</span>
+    </div>
+    <div id="cmdk-list" class="cmdk-list"></div>
+  </div>
+</div>
+
 <div id="timeline-modal" class="timeline-modal hidden" onclick="if(event.target===this) closeTimelineModal()">
   <div class="timeline-modal-card">
     <div class="timeline-modal-hdr">
