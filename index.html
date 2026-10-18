@@ -450,6 +450,14 @@ td.sv-grid{padding:clamp(2px,0.4vh,3px) 1px;text-align:center}
 .pbi-fullscreen-btn i{font-size:12px}
 /* ===== Timeline FAB + modal ===== */
 .timeline-fab{position:absolute;top:10px;right:10px;z-index:5;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:9px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;background:rgba(17, 83, 130,1);border:1px solid var(--blue-4);color:var(--blue-5);box-shadow:0 2px 10px rgba(0,0,0,.4);transition:.15s all}
+.sc-switch{position:relative;z-index:2;display:flex;align-items:center;gap:8px;flex-shrink:0;padding:0 clamp(12px,2.6vw,32px);margin:0 0 clamp(4px,0.8vh,8px)}
+.sc-switch-label{font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.sc-seg{display:inline-flex;border:1px solid rgba(32,144,224,0.35);border-radius:9px;overflow:hidden;background:rgba(255,255,255,0.03)}
+.sc-opt{font:inherit;font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:6px 14px;border:0;background:transparent;color:rgba(255,255,255,.55);cursor:pointer;transition:.15s all;white-space:nowrap}
+.sc-opt+.sc-opt{border-left:1px solid rgba(32,144,224,0.35)}
+.sc-opt:hover{background:rgba(32,144,224,0.12);color:var(--blue-5)}
+.sc-opt.active{background:rgba(32,144,224,0.28);color:var(--blue-5)}
+@media (max-width:700px){.sc-switch-label{display:none}.sc-opt{font-size:9px;padding:5px 10px}}
 .timeline-fab:hover{background:rgba(20, 105, 166,1);transform:translateY(-1px)}
 .timeline-fab i{font-size:13px}
 .timeline-modal{position:fixed;inset:0;z-index:9999;background:rgba(3,8,16,0.88);display:flex;align-items:center;justify-content:center;padding:40px}
@@ -659,6 +667,14 @@ th.now-col{color:#fff!important}
     <div class="view-tab view-tab-blue" onclick="setFrame(this,'vessels','https://strenaterminals-my.sharepoint.com/personal/btapia_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B236A26FB-62A1-49E0-B742-19B88D799763%7D&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True','https://strenaterminals-my.sharepoint.com/:x:/r/personal/btapia_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B236A26FB-62A1-49E0-B742-19B88D799763%7D&file=Planificaci%25u00f3n%20Naviera.xlsm&fromShare=true&action=default&mobileredirect=true')" data-full="https://strenaterminals-my.sharepoint.com/:x:/r/personal/btapia_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B236A26FB-62A1-49E0-B742-19B88D799763%7D&file=Planificaci%25u00f3n%20Naviera.xlsm&fromShare=true&action=default&mobileredirect=true"><i class="ti ti-table"></i>Planification</div>
     <a class="view-open-link view-open-link-blue" id="vessels-open" href="https://app.powerbi.com/view?r=eyJrIjoiNTdkNmU3NjItZjI5Mi00MTg1LWE0OTEtNmNmOGU1NThiZjUxIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" target="_blank"><span class="view-open-link-text">Open</span> <i class="ti ti-external-link"></i></a>
   </div>
+  <!-- Shift Change sub-view toggle (shown only on the Shift Change tab). Paste the links in data-url / data-full. -->
+  <div class="sc-switch hidden" id="vessels-sc-switch">
+    <span class="sc-switch-label">View</span>
+    <div class="sc-seg">
+      <button type="button" class="sc-opt active" data-view="report" data-url="https://app.powerbi.com/view?r=eyJrIjoiZmVjYTA3YmUtZmQ1Yi00NzAxLTk4MTEtMzM5Y2RjOTQ0MmY5IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" onclick="setShiftView(this)">Report Version</button>
+      <button type="button" class="sc-opt" data-view="control" data-url="https://app.powerbi.com/view?r=eyJrIjoiM2VkZjIyMmItZDAwNi00Zjk0LTk3YTktZWRjNGE2Y2QzOTU4IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" data-full="https://app.powerbi.com/view?r=eyJrIjoiM2VkZjIyMmItZDAwNi00Zjk0LTk3YTktZWRjNGE2Y2QzOTU4IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" data-full="" onclick="setShiftView(this)">Control only</button>
+    </div>
+  </div>
   <div class="embed-wrap embed-wrap-fill" id="vessels-iframe-wrap">
     <div class="pbi-wrap" id="vessels-pbi-wrap">
       <iframe class="embed-frame embed-frame-fill" id="vessels-frame" src="https://app.powerbi.com/view?r=eyJrIjoiNTdkNmU3NjItZjI5Mi00MTg1LWE0OTEtNmNmOGU1NThiZjUxIiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9" allowfullscreen></iframe>
@@ -783,7 +799,7 @@ th.now-col{color:#fff!important}
   <div class="hdr hdr-fill"><div class="hdr-brand"><button class="back-btn back-red" onclick="goPg('pg-hub')">◄ MENU</button><div class="hdr-pipe hdr-pipe-red"></div><div><div class="hdr-ttl">Yard Operations</div></div></div><img class="hdr-logo" src="img/best-logo.png" alt="BEST" onerror="this.style.display='none'"></div>
     <div class="view-panel view-panel-fill">
     <div class="view-tab view-tab-red active" onclick="setFrame(this,'yard','https://app.powerbi.com/view?r=eyJrIjoiOWY4ZjAxYzItZDc2ZC00YWExLTg0MzctOTEyOWU3YmEzMmY1IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9')" data-full="https://app.powerbi.com/view?r=eyJrIjoiOWY4ZjAxYzItZDc2ZC00YWExLTg0MzctOTEyOWU3YmEzMmY1IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"><i class="ti ti-chart-bar"></i>Yard Information</div>
-    <div class="view-tab view-tab-red active" onclick="setFrame(this,'yard','https://app.powerbi.com/view?r=eyJrIjoiMWJhODgzYjYtNDJmMy00YTRhLWIzZTAtOTNlZjkzNTkyNDM0IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9')" data-full="https://app.powerbi.com/view?r=eyJrIjoiMWJhODgzYjYtNDJmMy00YTRhLWIzZTAtOTNlZjkzNTkyNDM0IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"><i class="ti ti-chart-bar"></i>Truck Flow</div>
+    <div class="view-tab view-tab-red" onclick="setFrame(this,'yard','https://app.powerbi.com/view?r=eyJrIjoiMWJhODgzYjYtNDJmMy00YTRhLWIzZTAtOTNlZjkzNTkyNDM0IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9')" data-full="https://app.powerbi.com/view?r=eyJrIjoiMWJhODgzYjYtNDJmMy00YTRhLWIzZTAtOTNlZjkzNTkyNDM0IiwidCI6ImMyMTBkM2QxLTk3ZGUtNDkyMS05NDU2LTdlZWJhYzg1YjRiNiIsImMiOjR9"><i class="ti ti-chart-bar"></i>Truck Flow</div>
     <div class="view-tab view-tab-red" onclick="setFrame(this,'yard','https://strenaterminals-my.sharepoint.com/personal/gmarquez_iti_cl/_layouts/15/Doc.aspx?sourcedoc={5719949c-8a74-4236-9f8a-1f8764638cb0}&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True')" data-full="https://strenaterminals-my.sharepoint.com/:x:/r/personal/gmarquez_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B5719949C-8A74-4236-9F8A-1F8764638CB0%7D&file=proyecci%25u00f3n%20In-Out.xlsx&fromShare=true&action=default&mobileredirect=true"><i class="ti ti-table"></i>Projection IN-OUT</div>
     <div class="view-tab view-tab-red" onclick="setFrame(this,'yard','https://strenaterminals-my.sharepoint.com/personal/btapia_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B811E1B41-09A1-49DE-948E-7FBE4EAE31D2%7D&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True')" data-full="https://strenaterminals-my.sharepoint.com/:x:/r/personal/btapia_iti_cl/_layouts/15/Doc.aspx?sourcedoc=%7B811E1B41-09A1-49DE-948E-7FBE4EAE31D2%7D&file=PROGRAMACI%C3%93N%20STACKING.xlsx&action=default&mobileredirect=true&DefaultItemOpen=1&web=1"><i class="ti ti-table"></i>Stacking Plan</div>
     <div class="view-tab view-tab-red" id="yard-dispatch-tab" onclick="setFrame(this,'yard','https://strenaterminals-my.sharepoint.com/personal/mfloresm_iti_cl/_layouts/15/Doc.aspx?sourcedoc={61062705-013f-42e2-b988-0166b8d0df08}&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True&waccluster=AE3&edaebp=&edaebf=res50')" data-full="https://strenaterminals-my.sharepoint.com/:x:/r/personal/mfloresm_iti_cl/Documents/Secuencias%20operaciones%20terrestres/Dispatch%20Plan.xlsx?d=w61062705013f42e2b9880166b8d0df08&csf=1&web=1&e=7wVc4c">
@@ -1160,15 +1176,46 @@ function showSchedule(btn) {
   saveVesselsTab('Berth Window');
   const fab = document.getElementById('vessels-timeline-fab');
   if (fab) fab.classList.add('hidden');
+  const scSw = document.getElementById('vessels-sc-switch');
+  if (scSw) scSw.classList.add('hidden');
   mountAllMaps();
   restoreServiceFilters();
   highlightTodayColumn();
+}
+/* ===== Shift Change sub-views: Report Version / Control only ===== */
+function getShiftOpt() {
+  let v = 'report';
+  try { v = localStorage.getItem('iti_shiftView') || 'report'; } catch (e) {}
+  const sw = document.getElementById('vessels-sc-switch');
+  return sw.querySelector('.sc-opt[data-view="' + v + '"]') || sw.querySelector('.sc-opt');
+}
+function applyShiftOpt(opt) {
+  const sw = document.getElementById('vessels-sc-switch');
+  sw.querySelectorAll('.sc-opt').forEach(o => o.classList.toggle('active', o === opt));
+  const url = opt.dataset.url || 'about:blank';   // empty link -> blank until you paste it
+  document.getElementById('vessels-frame').src = url;
+  document.getElementById('vessels-open').href = opt.dataset.full || opt.dataset.url || '#';
+}
+function setShiftView(opt) {
+  try { localStorage.setItem('iti_shiftView', opt.dataset.view); } catch (e) {}
+  applyShiftOpt(opt);
 }
 function setFrame(btn, area, url) {
   if (area === 'vessels') {
     showVesselsPanel('vessels-iframe-wrap');
   }
-  const full = btn.dataset.full || url;
+  let full = btn.dataset.full || url;
+  const scSw = document.getElementById('vessels-sc-switch');
+  if (area === 'vessels' && scSw) {
+    const isSC = btn.id === 'vessels-shiftchange-tab';
+    scSw.classList.toggle('hidden', !isSC);
+    if (isSC) {
+      const o = getShiftOpt();
+      scSw.querySelectorAll('.sc-opt').forEach(x => x.classList.toggle('active', x === o));
+      url = o.dataset.url || 'about:blank';
+      full = o.dataset.full || o.dataset.url || '#';
+    }
+  }
   document.getElementById(area + '-frame').src = url;
   document.getElementById(area + '-open').href = full;
   btn.parentElement.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
@@ -1215,6 +1262,8 @@ const CMDK_COMMANDS = [
   { label:'Operator Performance', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); clickTabByLabel('pg-vessels','Operator Performance'); } },
   { label:'Detentions', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); clickTabByLabel('pg-vessels','Detentions'); } },
   { label:'Shift Change', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); document.getElementById('vessels-shiftchange-tab').click(); } },
+  { label:'Shift Change · Report Version', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); try{localStorage.setItem('iti_shiftView','report')}catch(e){} document.getElementById('vessels-shiftchange-tab').click(); } },
+  { label:'Shift Change · Control only', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); try{localStorage.setItem('iti_shiftView','control')}catch(e){} document.getElementById('vessels-shiftchange-tab').click(); } },
   { label:'Pier & Vessels Inf.', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); clickTabByLabel('pg-vessels','Pier & Vessels'); } },
   { label:'Vessel Milestones', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); clickTabByLabel('pg-vessels','Vessel Milestones'); } },
   { label:'Planification (Vessel)', group:'Vessel Operations', action:()=>{ goPg('pg-vessels'); clickTabByLabel('pg-vessels','Planification'); } },
